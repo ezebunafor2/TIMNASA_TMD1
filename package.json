@@ -2,13 +2,13 @@
   "name": "babyboy",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "control.js",
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "node index.js", 
-    "start": "node index.js", 
-    "timoth": "pm2 start index.js --attach --max-memory-restart 490M",
+    "s": "node control.js", 
+    "start": "node control.js", 
+    "timoth": "pm2 start control.js --attach --max-memory-restart 490M",
     "c": "tsc"
   },
   "keywords": [
@@ -62,6 +62,6 @@
     "wa-sticker-formatter": "^4.4.4",
     "wikipedia": "^2.1.2",  
     "yt-search": "^2.10.4"
-   
+ 
   }
 }
