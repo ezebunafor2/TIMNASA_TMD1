@@ -9,7 +9,7 @@ RUN apt-get update && \
   npm i pm2 -g && \
   rm -rf /var/lib/apt/lists/*
   
-RUN  git clone https://github.com/Next5x/TIMNASA_TMD1  /root/Timnasa_BOt
+RUN  git clone https://github.com/Next5x/TIMNASA_TMD2  /root/Timnasa_BOt
 WORKDIR /root/Timnasa_Bot/
 
 
@@ -22,4 +22,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["node", "index.js"]
+CMD ["node", "control.js"]
