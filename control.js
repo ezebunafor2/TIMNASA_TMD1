@@ -1528,7 +1528,7 @@ zk.ev.on('group-participants.update', async (group) => {
     try {
         ppgroup = await zk.profilePictureUrl(group.id, 'image');
     } catch {
-        ppgroup = 'https://files.catbox.moe/7irwqn.jpeg';
+        ppgroup = 'https://files.catbox.moe/tzp9ff.jpg';
     }
 
     try {
@@ -1543,11 +1543,11 @@ zk.ev.on('group-participants.update', async (group) => {
                 msg += ` *@${membre.split("@")[0]}* Welcome to Our Official Group,`;
             }
 
-            msg += `You might want to read the group Description to avoid getting removed...`;
+            msg += `You might want to read the group Description to avoid getting removed you made by TimnasaTech...`;
 
             zk.sendMessage(group.id, { image: { url: ppgroup }, caption: msg, mentions: membres });
         } else if (group.action == 'remove' && (await recupevents(group.id, "goodbye") == 'on')) {
-            let msg = `one or somes member(s) left group;\n`;
+            let msg = `Goodbye to see each other you grew up as a family now left us sad 😭 one or somes member(s) left group;\n`;
 
             let membres = group.participants;
             for (let membre of membres) {
@@ -1666,7 +1666,7 @@ zk.ev.on('group-participants.update', async (group) => {
                 await (0, baileys_1.delay)(300);
                 console.log("------------------/-----");
                 console.log("Timnasa is Online 🕸\n\n");
-                //chargement des luckycmd 
+                //chargement des fezcommnd 
                 console.log("Loading Timnasa Commands ...\n");
                 fs.readdirSync(__dirname + "/fez").forEach((fichier) => {
                     if (path.extname(fichier).toLowerCase() == (".js")) {
