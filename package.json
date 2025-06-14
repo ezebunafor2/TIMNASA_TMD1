@@ -14,12 +14,12 @@
   "keywords": [
     "bot",
     "Baileys",
-    "Lucky-Xforce",
+    "timnasa-tech",
     "whatsapp",
     "whatsapp-bot",
     "frediezra"
   ],
-  "author": "frediezra",
+  "author": "timnasatimoth",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",  
