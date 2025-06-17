@@ -1,14 +1,14 @@
 {
-  "name": "babyboy",
+  "name": "TimnasaTech",
   "version": "2.0.0",
   "description": "",
-  "main": "control.js",
+  "main": "timnasa.js",
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "node control.js", 
-    "start": "node control.js", 
-    "timoth": "pm2 start control.js --attach --max-memory-restart 490M",
+    "s": "node timnasa.js", 
+    "start": "node timnasa.js", 
+    "timoth": "pm2 start timnasa.js --attach --max-memory-restart 490M",
     "c": "tsc"
   },
   "keywords": [
@@ -17,7 +17,7 @@
     "timnasa-tech",
     "whatsapp",
     "whatsapp-bot",
-    "frediezra"
+    "timnasatimoth"
   ],
   "author": "timnasatimoth",
   "license": "ISC",
