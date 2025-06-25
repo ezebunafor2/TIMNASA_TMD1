@@ -4,19 +4,19 @@ if (fs.existsSync('set.env'))
     require('dotenv').config({ path: __dirname + '/set.env' });
 const path = require("path");
 const databasePath = path.join(__dirname, './database.db');
-//const DATABASE_URL = process.env.DATABASE_URL === undefined
+const DATABASE_URL = process.env.DATABASE_URL === undefined
     ? databasePath
     : process.env.DATABASE_URL;
 module.exports = { session: process.env.SESSION_ID || 'timoth',
     PREFIXE: process.env.PREFIX || ".",
-    GITHUB : process.env.GITHUB|| 'https://github.com/Next5x/TIMNASA-TMD2',
+    GITHUB : process.env.GITHUB|| 'https://github.com/Next5x/TIMNASA_TMD1',
     OWNER_NAME : process.env.OWNER_NAME || "Timothy Timnasa",
     NUMERO_OWNER : process.env.NUMERO_OWNER || "255784766591, 255756469954",  
               
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "non",
     AUTO_DOWNLOAD_STATUS: process.env.AUTO_DOWNLOAD_STATUS || 'non',
     AUTO_REACT: process.env.AUTO_REACTION || "non",  
-    URL: process.env.URL || "https://files.catbox.moe/whphjs.png",  
+    URL: process.env.URL || "https://files.catbox.moe/snh8mc.jpeg",  
     AUTO_REACT_STATUS: process.env.AUTO_REACT_STATUS || 'non',              
     CHATBOT: process.env.CHAT_BOT || "off",              
     AUTO_READ_MESSAGES: process.env.AUTO_READ_MESSAGES || "yes",
@@ -44,7 +44,7 @@ module.exports = { session: process.env.SESSION_ID || 'timoth',
     DATABASE_URL,
     DATABASE: DATABASE_URL === databasePath
         ? "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9" : "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9",
-    * new Sequelize({
+    /* new Sequelize({
      dialect: 'sqlite',
      storage: DATABASE_URL,
      logging: false,
