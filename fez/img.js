@@ -1,12 +1,12 @@
 
 
 
-const {zokou} = require('../framework/zokou');
+const {timoth} = require('../timnasa/timoth');
 var gis = require('g-i-s');
 
 
-zokou({
-  nomCom: "img",
+timoth({
+  nomCom: "picture",
   categorie: "Search",
   reaction: "📷"
 },
