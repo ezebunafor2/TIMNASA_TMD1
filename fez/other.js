@@ -1,9 +1,9 @@
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const { delay, loading, react } = require("../framework/utils");
 
 const JavaScriptObfuscator = require("javascript-obfuscator");
 
-zokou(
+timoth(
     {
         nomCom: "encode",
         categorie: "other",
