@@ -1,8 +1,8 @@
-let { smd } = require("../lib");
+const { timoth } = require("../timnasa/timoth");
 const axios = require("axios");
 const fetch = require("node-fetch");
 
-smd(
+timoth(
   {
     pattern: "wanews",
     alias: ["wa"],
@@ -53,7 +53,7 @@ smd(
 );
 
 
-smd(
+timoth(
   {
     pattern: "iosnews",
     alias: ["ios"],
@@ -98,7 +98,7 @@ smd(
   }
 );
 
-smd(
+timoth(
   {
     pattern: "googlenews",
     alias: ["gnews"],
@@ -141,7 +141,7 @@ smd(
     }
   }
 );
-smd(
+timoth(
   {
     pattern: "spacenews",
     desc: "Fetches articles from the Spaceflight News API.",
@@ -181,7 +181,7 @@ smd(
   }
 );
 
-smd(
+timoth(
   {
     pattern: "technews",
     alias: ["tn"],
@@ -217,7 +217,7 @@ smd(
     }
   }
 );
-smd(
+timoth(
   {
     pattern: "population",
     desc: "Fetches current population statistics.",
@@ -253,7 +253,7 @@ smd(
     }
   }
 );
-smd(
+timoth(
   {
     pattern: "animesearch",
     category: "news",
@@ -299,7 +299,7 @@ ${anime.description}
     }
   }
 );
-smd({
+timoth({
   pattern: 'nasanews',
   fromMe: false,
   desc: 'Get the latest NASA news',
