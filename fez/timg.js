@@ -5,7 +5,7 @@ const gis = require("g-i-s");
 const axios = require("axios");
 const conf = require(__dirname + "/../set");
 timoth({
-  'nomCom': "img",
+  'nomCom': "image",
   'aliases': ["image", "images"],
   'categorie': "search",
   'reaction': '☘️'
@@ -35,10 +35,10 @@ timoth({
         'image': {
           'url': _0x54f9fa[_0xf62d6].url
         },
-        'caption': "Enjoy the view",
+        'caption': "ᴇɴᴊᴏʏ ᴛʜᴇ ᴠɪᴇᴡ ɪᴍᴀɢᴇ",
         'contextInfo': {
           'externalAdReply': {
-            'title': "LEZKUSH-TMD",
+            'title': "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
             'body': "Here's the image you searched for: " + _0x2d6871,
             'thumbnailUrl': _0x54f9fa[_0xf62d6].url,
             'sourceUrl': conf.GURL,
@@ -52,8 +52,8 @@ timoth({
     }
   }
 });
-zokou({
-  'nomCom': "waifues1",
+timoth({
+  'nomCom': "ponoxv",
   'categorie': "Hentai",
   'reaction': '💗'
 }, async (_0x376a4f, _0x5b78d8, _0x1f7067) => {
@@ -69,10 +69,10 @@ zokou({
         'image': {
           'url': _0x4859df
         },
-        'caption': "Enjoy the view",
+        'caption': "ᴇɴᴊᴏʏ ᴛʜᴇ ᴠɪᴇᴡ ɪᴍᴀɢᴇ",
         'contextInfo': {
           'externalAdReply': {
-            'title': "LEZKUSH-TMD",
+            'title': "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
             'body': "Here's a great image related to: waifu",
             'thumbnailUrl': _0x4859df,
             'sourceUrl': conf.GURL,
@@ -88,8 +88,8 @@ zokou({
     _0x3aa311("Error retrieving data: " + _0x21952d.message);
   }
 });
-zokou({
-  'nomCom': "trapor",
+timoth({
+  'nomCom': "ponovxv",
   'categorie': "Hentai",
   'reaction': '☘️'
 }, async (_0xed2bfa, _0x2a858c, _0x1468de) => {
@@ -108,7 +108,7 @@ zokou({
         'caption': "Enjoy the view",
         'contextInfo': {
           'externalAdReply': {
-            'title': "LEZKUSH-TMD",
+            'title': "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
             'body': "Here's a great image related to: waifu",
             'thumbnailUrl': _0x557942,
             'sourceUrl': conf.GURL,
@@ -124,8 +124,8 @@ zokou({
     _0x49e9e9("Error retrieving data: " + _0x3cf187.message);
   }
 });
-zokou({
-  'nomCom': "pineko1",
+timoth({
+  'nomCom': "pono/ko",
   'categorie': "Hentai",
   'reaction': '💗'
 }, async (_0x506093, _0x3a048e, _0x2c5289) => {
@@ -144,7 +144,7 @@ zokou({
         'caption': "Enjoy the view",
         'contextInfo': {
           'externalAdReply': {
-            'title': "LEZKUSH-TMD",
+            'title': "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
             'body': "Here's a great image related to: waifu",
             'thumbnailUrl': _0x48dd46,
             'sourceUrl': conf.GURL,
@@ -160,8 +160,8 @@ zokou({
     _0x29d4dd("Error retrieving data: " + _0x2ad7f0.message);
   }
 });
-zokou({
-  'nomCom': "gils",
+timoth({
+  'nomCom': "ponowomen",
   'categorie': "Hentai",
   'reaction': '💗'
 }, async (_0x7b6528, _0x36d13b, _0x513a8c) => {
@@ -180,7 +180,7 @@ zokou({
         'caption': "Enjoy the view",
         'contextInfo': {
           'externalAdReply': {
-            'title': "LEZKUSH-TMD",
+            'title': "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
             'body': "Here's a great image related to: waifu",
             'thumbnailUrl': _0x35d7d7,
             'sourceUrl': conf.GURL,
