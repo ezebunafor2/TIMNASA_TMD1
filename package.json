@@ -2,13 +2,13 @@
   "name": "TimnasaTech",
   "version": "2.0.0",
   "description": "",
-  "main": "indexs.js",
+  "main": "timnasax.js",
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "node indexs.js", 
-    "start": "node indexs.js", 
-    "timoth": "pm2 start indexs.js --attach --max-memory-restart 490M",
+    "s": "node timnasax.js", 
+    "start": "node timnasax.js", 
+    "timoth": "pm2 start timnasax.js --attach --max-memory-restart 490M",
     "c": "tsc"
   },
   "keywords": [
