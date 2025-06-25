@@ -6,317 +6,434 @@ const { Catbox } = require("node-catbox");
 const fs = require('fs-extra');
 const { downloadAndSaveMediaMessage } = require('@whiskeysockets/baileys');
 
-// Initialize Catbox
-const catbox = new Catbox();
 
-// Function to upload a file to Catbox and return the URL
-async function uploadToCatbox(filePath) {
-  if (!fs.existsSync(filePath)) {
-    throw new Error("File does not exist");
-  }
-  try {
-    const uploadResult = await catbox.uploadFile({ path: filePath });
-    if (uploadResult) {
-      return uploadResult;
-    } else {
-      throw new Error("Error retrieving file link");
+
+timoth(
+  {
+    nomCom: "session",
+    aliases: ["gtmovie", "mvdl"],
+    categorie: "Search",
+    reaction: "🎬",
+  },
+  async (jid, sock, data) => {
+    const { arg, ms } = data;
+
+    const contextInfo = {
+      forwardingScore: 999,
+      isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: "120363332512801418@newsletter",
+        newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
+        serverMessageId: 143,
+      },
+      externalAdReply: {
+        title: "Movie Finder",
+        body: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
+        thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+        sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
+        mediaType: 1,
+        renderLargerThumbnail: false,
+      },
+    };
+
+    const repondre = async (text) => {
+      return sock.sendMessage(
+        jid,
+        {
+          text,
+          contextInfo,
+        },
+        { quoted: ms }
+      );
+    };
+
+    if (!arg[0]) return repondre("❌ Please provide a movie title.");
+
+    const query = arg.join(" ");
+    await repondre("🔍 Searching for movie and trailer...");
+
+    const apiKey = "38f19ae1"; // Replace with process.env.OMDB_API_KEY in production
+
+    try {
+      const searchRes = await axios.get(`http://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=${apiKey}`);
+      const searchData = searchRes.data;
+
+      if (searchData.Response === "False") return repondre(`❌ Movie not found: ${searchData.Error}`);
+
+      const movieID = searchData.Search[0].imdbID;
+      const detailsRes = await axios.get(`http://www.omdbapi.com/?i=${movieID}&apikey=${apiKey}`);
+      const movie = detailsRes.data;
+
+      if (movie.Response === "False") return repondre(`❌ Error fetching movie details: ${movie.Error}`);
+
+      const ytResult = await ytSearch(`${movie.Title} trailer`);
+      const trailer = ytResult.videos.find((v) => v.seconds <= 240); // max 4 min
+
+      if (!trailer) return repondre("❌ No trailer found on YouTube.");
+
+      const trailerInfo = await ytdl.getInfo(trailer.url);
+      const format = ytdl.chooseFormat(trailerInfo.formats, { quality: "18" });
+
+      if (!format || !format.contentLength) return repondre("❌ No downloadable video format available.");
+
+      const sizeMB = parseInt(format.contentLength, 10) / (1024 * 1024);
+      if (sizeMB > 100) return repondre("❌ Trailer is too large (over 100MB).");
+
+      await sock.sendMessage(
+        jid,
+        {
+          video: { stream: ytdl(trailer.url, { quality: "18" }) },
+          caption: `🎬 *${movie.Title}* (${movie.Year})\n⭐ *IMDb:* ${movie.imdbRating}/10\n\n📖 *Plot:* ${movie.Plot}`,
+          contextInfo: {
+            forwardingScore: 999,
+            isForwarded: true,
+            externalAdReply: {
+              title: movie.Title,
+              body: "Watch the trailer",
+              thumbnailUrl: movie.Poster !== "N/A" ? movie.Poster : "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+              sourceUrl: `https://www.imdb.com/title/${movie.imdbID}`,
+              mediaType: 1,
+              renderLargerThumbnail: true,
+            },
+          },
+        },
+        { quoted: ms }
+      );
+    } catch (err) {
+      console.error("Movie trailer error:", err);
+      return repondre("❌ An error occurred. Please try again.");
     }
-  } catch (error) {
-    throw new Error(String(error));
   }
-}
-// Define the command with aliases for play
+);
 timoth({
-  nomCom: "playsong",
-  aliases: ["song", "playdoc", "audio", "mp3"],
-  categorie: "download",
-  reaction: "🎼"
-}, async (dest, zk, commandOptions) => {
-  const { arg, ms, repondre } = commandOptions;
+  nomCom: "video",
+  aliases: ["video", "ytvideo", "ytmp4","getmovie", "moviedl","movie"],
+  categorie: "Search",
+  reaction: "🎬",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
 
-  // Check if a query is provided
-  if (!arg[0]) {
-    return repondre("Please provide a song name.");
-  }
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {forwardingScore: 999,
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯",
+                serverMessageId: 143,
+              },
+        externalAdReply: {
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          renderLargerThumbnail: false,
+        },
+      },
+    }, { quoted: ms });
+  };
 
+  if (!Array.isArray(arg) || !arg.length) return repondre("Please provide a video name.");
   const query = arg.join(" ");
 
   try {
-    // Perform a YouTube search based on the query
-    const searchResults = await ytSearch(query);
+    const results = await ytSearch(query);
+    if (!results || !results.videos.length) return repondre("No video found for the specified query.");
+    const video = results.videos[0];
+    const videoUrl = video.url;
 
-    // Check if any videos were found
-    if (!searchResults || !searchResults.videos.length) {
-      return repondre('No song found for the specified query.');
-    }
-
-    const firstVideo = searchResults.videos[0];
-    const videoUrl = firstVideo.url;
-
-    // Function to get download data from APIs
-    const getDownloadData = async (url) => {
-      try {
-        const response = await axios.get(url);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching data from API:', error);
-        return { success: false };
-      }
-    };
-
-    // List of APIs to try
-    const apis = [
-      `https://api-rin-tohsaka.vercel.app/download/ytmp4?url=${encodeURIComponent(videoUrl)}`,
-      `https://apis.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(videoUrl)}`,
-      `https://www.dark-yasiya-api.site/download/ytmp3?url=${encodeURIComponent(videoUrl)}`,
-      `https://api.giftedtech.web.id/api/download/dlmp3?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`,
-      `https://api.dreaded.site/api/ytdl/audio?url=${encodeURIComponent(videoUrl)}`
-    ];
-
-    let downloadData;
-    for (const api of apis) {
-      downloadData = await getDownloadData(api);
-      if (downloadData && downloadData.success) break;
-    }
-
-    // Check if a valid download URL was found
-    if (!downloadData || !downloadData.success) {
-      return repondre('Failed to retrieve download URL from all sources. Please try again later.');
-    }
-
-    const downloadUrl = downloadData.result.download_url;
-    const videoDetails = downloadData.result;
-
-    // Prepare the message payload with external ad details
-    const messagePayloads = [
-      {
-      caption: `\n*𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺*\n
-`,
-        audio: { url: downloadUrl },
-        mimetype: 'audio/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: conf.BOT,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
+    await sock.sendMessage(jid, {
+      text: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯",
+      contextInfo: {forwardingScore: 999,
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯",
+                serverMessageId: 143,
+              },
+        externalAdReply: {
+          title: video.title,
+          body: "Searching YouTube...",
+          thumbnailUrl: video.thumbnail,
+          sourceUrl: videoUrl,
+          mediaType: 1,
+          renderLargerThumbnail: false,
         },
       },
-      {
-      caption: `\n*𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺*\n
-`,
-        document: { url: downloadUrl },
-        mimetype: 'audio/mpeg',
-        contextInfo: {
-          externalAdReply: {
-            title: conf.BOT,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
-      },
-      {
-      caption: `\n*𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺*\n
-`,
-        document: { url: downloadUrl },
-        mimetype: 'audio/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: conf.BOT,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
-      }
-    ];
+    }, { quoted: ms });
 
-    // Send the download link to the user for each payload
-    for (const messagePayload of messagePayloads) {
-      await zk.sendMessage(dest, messagePayload, { quoted: ms });
-    }
-
-  } catch (error) {
-    console.error('Error during download process:', error);
-    return repondre(`Download failed due to an error: ${error.message || error}`);
-  }
-});
-
-// Define the command with aliases for video
-timoth({
-  nomCom: "playvideo",
-  aliases: ["videodoc", "film", "mp4"],
-  categorie: "download",
-  reaction: "🎞️"
-}, async (dest, zk, commandOptions) => {
-  const { arg, ms, repondre } = commandOptions;
-
-  // Check if a query is provided
-  if (!arg[0]) {
-    return repondre("Please provide a video name.");
-  }
-
-  const query = arg.join(" ");
-
-  try {
-    // Perform a YouTube search based on the query
-    const searchResults = await ytSearch(query);
-
-    // Check if any videos were found
-    if (!searchResults || !searchResults.videos.length) {
-      return repondre('No video found for the specified query.');
-    }
-
-    const firstVideo = searchResults.videos[0];
-    const videoUrl = firstVideo.url;
-
-    // Function to get download data from APIs
-    const getDownloadData = async (url) => {
-      try {
-        const response = await axios.get(url);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching data from API:', error);
-        return { success: false };
-      }
-    };
-
-    // List of APIs to try
-    const apis = [
-      `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(videoUrl)}`,
+    const apiUrls = [
+      `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`,
       `https://www.dark-yasiya-api.site/download/ytmp4?url=${encodeURIComponent(videoUrl)}`,
-      `https://api.giftedtech.web.id/api/download/dlmp4?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`,
-      `https://api.dreaded.site/api/ytdl/video?url=${encodeURIComponent(videoUrl)}`
+      `https://api.dreaded.site/api/ytdl/video?query=${encodeURIComponent(videoUrl)}`,
+      `https://youtube-download-api.matheusishiyama.repl.co/mp4/?url=${encodeURIComponent(videoUrl)}`,
     ];
 
-    let downloadData;
-    for (const api of apis) {
-      downloadData = await getDownloadData(api);
-      if (downloadData && downloadData.success) break;
+    let response;
+    for (let url of apiUrls) {
+      try {
+        console.log("Trying API:", url);
+        const res = await axios.get(url);
+        console.log("Response:", JSON.stringify(res.data));
+        const link = res.data?.result?.download_url || res.data?.result?.link || res.data?.link;
+        if (link) {
+          response = {
+            title: res.data?.result?.title || res.data?.title || video.title,
+            link,
+            thumbnail: res.data?.result?.thumbnail || res.data?.thumbnail || video.thumbnail,
+          };
+          break;
+        }
+      } catch (e) {
+        console.log("API failed:", url, e.message);
+      }
     }
 
-    // Check if a valid download URL was found
-    if (!downloadData || !downloadData.success) {
-      return repondre('Failed to retrieve download URL from all sources. Please try again later.');
+    // Final fallback using ytdl-core
+    if (!response) {
+      try {
+        const info = await ytdl.getInfo(videoUrl);
+        const format = ytdl.chooseFormat(info.formats, { quality: '18' }); // 360p mp4
+        if (format && format.url) {
+          response = {
+            title: info.videoDetails.title,
+            link: format.url,
+            thumbnail: info.videoDetails.thumbnails?.pop()?.url,
+          };
+        }
+      } catch (err) {
+        console.error("ytdl-core fallback failed:", err);
+      }
     }
 
-    const downloadUrl = downloadData.result.download_url;
-    const videoDetails = downloadData.result;
+    if (!response || !response.link) {
+      return repondre("All sources failed. Try again later.");
+    }
 
-    // Prepare the message payload with external ad details
-    const messagePayloads = [
-      {
-      caption: `\n*𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺*\n
-`,
-        video: { url: downloadUrl },
-        mimetype: 'video/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: conf.BOT,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
+    await sock.sendMessage(jid, {
+      video: { url: response.link },
+      caption: response.title,
+      mimetype: "video/mp4",
+      contextInfo: {
+        externalAdReply: {
+          title: response.title,
+          body: "Tap to watch on YouTube",
+          mediaType: 1,
+          showAdAttribution: false,
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363332512801418@newsletter',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯',
+            serverMessageId: 143
+          }
         },
       },
-      {
-      caption: `\n*𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺*\n
+    }, { quoted: ms });
 
-
-> 💙POWERED BY 𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑆𝛩𝛮𝐺`,
-        document: { url: downloadUrl },
-        mimetype: 'video/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: conf.BOT,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
-      }
-    ];
-
-    // Send the download link to the user
-    for (const messagePayload of messagePayloads) {
-      await zk.sendMessage(dest, messagePayload, { quoted: ms });
-    }
-
-  } catch (error) {
-    console.error('Error during download process:', error);
-    return repondre(`Download failed due to an error: ${error.message || error}`);
+  } catch (err) {
+    console.error("Video Download Error:", err);
+    return repondre("Video download failed: " + (err.message || err));
   }
 });
 
-
-// Command to upload image, video, or audio file
 timoth({
-  'nomCom': 'timnasa/url',       // Command to trigger the function
-  'categorie': "download", // Command category
-  'reaction': '⏸️'    // Reaction to use on command
-}, async (groupId, client, context) => {
-  const { msgRepondu, repondre } = context;
+  nomCom: "playtext",
+  aliases: ["ly", "songlyrics", "lyric"],
+  categorie: "Search",
+  reaction: "📝",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
 
-  // If no message (image/video/audio) is mentioned, prompt user
-  if (!msgRepondu) {
-    return repondre("Please mention an image, video, or audio.");
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363332512801418@newsletter',
+          newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝐋𝚰𝐘𝐂𝚪𝐂𝐒',
+          serverMessageId: 143
+        },
+        externalAdReply: {
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝐋𝚰𝐘𝐂𝚪𝐂𝐒",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
+          thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+          sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
+          mediaType: 1,
+          renderLargerThumbnail: false,
+        },
+      },
+    }, { quoted: ms });
+  };
+
+  if (!arg[0]) return repondre("Please provide the song name.");
+
+  const query = arg.join(" ");
+  let lyricsData = null;
+
+  const sources = [
+    async () => {
+      const res = await axios.get(`https://api.popcat.xyz/lyrics?song=${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.lyrics) throw new Error("Popcat failed");
+      return {
+        title: res.data.title,
+        author: res.data.artist,
+        lyrics: res.data.lyrics,
+        thumbnail: res.data.image,
+        link: res.data.url
+      };
+    },
+    async () => {
+      const res = await axios.get(`https://some-random-api.ml/lyrics?title=${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.lyrics) throw new Error("Some-Random-API failed");
+      return {
+        title: res.data.title,
+        author: res.data.author || "Unknown",
+        lyrics: res.data.lyrics,
+        thumbnail: res.data.thumbnail?.genius,
+        link: res.data.links?.genius
+      };
+    },
+    async () => {
+      const res = await axios.get(`https://lyrist.vercel.app/api/${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.content) throw new Error("Lyrist failed");
+      return {
+        title: query,
+        author: "Unknown",
+        lyrics: res.data.content,
+        thumbnail: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+        link: "https://files.catbox.moe/oglf4q.jpg"
+      };
+    }
+  ];
+
+  for (const fetchLyrics of sources) {
+    try {
+      const data = await fetchLyrics();
+      if (data && data.lyrics) {
+        lyricsData = data;
+        break;
+      }
+    } catch (err) {
+      console.log("Lyrics source failed:", err.message);
+    }
   }
 
-  let mediaPath;
+  if (!lyricsData) return repondre("Couldn't find lyrics from any source. Try again with a different song title.");
 
-  // Check if the message contains a video
-  if (msgRepondu.videoMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.videoMessage);
-  }
- else if (msgRepondu.gifMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.gifMessage);
-  }
- else if (msgRepondu.stickerMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.stickerMessage);
-  }
-else if (msgRepondu.documentMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.documentMessage);
-  }
-  // Check if the message contains an image
-  else if (msgRepondu.imageMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.imageMessage);
-  }
-  // Check if the message contains an audio file
-  else if (msgRepondu.audioMessage) {
-    mediaPath = await client.downloadAndSaveMediaMessage(msgRepondu.audioMessage);
-  } else {
-    // If no media (image, video, or audio) is found, prompt user
-    return repondre("Please mention an image, video, or audio.");
-  }
+  const { title, author, lyrics, thumbnail, link } = lyricsData;
+  const message = `*🎵 Title:* ${title}\n*👤 Artist:* ${author}\n\n${lyrics.slice(0, 4096)}`;
+
+  await sock.sendMessage(jid, {
+    image: { url: thumbnail },
+    caption: message,
+    contextInfo: {
+      externalAdReply: {
+        title: title,
+        body: `By ${author}`,
+        mediaType: 1,
+        thumbnailUrl: thumbnail,
+        sourceUrl: link,
+        renderLargerThumbnail: false,
+      },
+    },
+  }, { quoted: ms });
+});
+
+
+timoth({
+  nomCom: "play",
+  aliases: ["song", "ytmp3", "audio", "mp3"],
+  categorie: "Search",
+  reaction: "⬇️",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
+
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363332512801418@newsletter',
+              newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘',
+              serverMessageId: 143},
+        externalAdReply: {
+          title: "📈𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝚫𝐔𝐃𝚰𝚯📉",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
+          thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+          sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
+          mediaType: 1,
+          renderLargerThumbnail: false,
+          showAdAttribution: false,
+        },
+      },
+    }, { quoted: ms });
+  };
+
+  if (!arg[0]) return repondre("Please provide a Audio name.");
+  const query = arg.join(" ");
 
   try {
-    // Upload the media to Catbox and get the URL
-    const fileUrl = await uploadToCatbox(mediaPath);
+    const results = await ytSearch(query);
+    if (!results || !results.videos.length)
+      return repondre("No audio found for the specified query.");
 
-    // Delete the local media file after upload
-    fs.unlinkSync(mediaPath);
+    const video = results.videos[0];
+    const videoUrl = video.url;
+    const title = video.title;
 
-    // Respond with the URL of the uploaded file
-    repondre(fileUrl);
-  } catch (error) {
-    console.error("Error while creating your URL:", error);
-    repondre("Oops, there was an error.");
+    // Attempt to split title into artist and song
+    const [artist, songTitle] = title.includes(" - ") ? title.split(" - ", 2) : ["Unknown Artist", title];
+
+    await sock.sendMessage(jid, { text: "```Downloading....```" }, { quoted: ms });
+
+    const tryApi = async (url) => {
+      try {
+        const res = await axios.get(url);
+        return res.data;
+      } catch {
+        return { success: false };
+      }
+    };
+
+    let response =
+      await tryApi(`https://apis.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`)
+      || await tryApi(`https://www.dark-yasiya-api.site/download/ytmp3?url=${encodeURIComponent(videoUrl)}`)
+      || await tryApi(`https://api.dreaded.site/api/ytdl/video?query=${encodeURIComponent(videoUrl)}`);
+
+    if (!response.success) return repondre("All sources failed. Try again later.");
+
+    const { download_url, thumbnail } = response.result;
+
+    await sock.sendMessage(jid, {
+      audio: { url: download_url },
+      mimetype: "audio/mp4",
+      contextInfo: {
+        externalAdReply: {
+          title: "📈𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝚫𝐔𝐃𝚰𝚯📉",
+          body: `🎵 ${artist} - ${songTitle}`,
+          mediaType: 1,
+          thumbnailUrl: thumbnail,
+          sourceUrl: videoUrl,
+          renderLargerThumbnail: false,
+          showAdAttribution: false,
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363332512801418@newsletter',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘',
+            serverMessageId: 143
+          }
+        },
+      },
+    }, { quoted: ms });
+
+  } catch (err) {
+    console.error("Download Error:", err);
+    return repondre("Download failed: " + (err.message || err));
   }
 });
