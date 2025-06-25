@@ -5,7 +5,7 @@
 
 
 const { timoth } = require("../timnasa/timoth")
-//const { getGroupe } = require("../bdd/groupe")
+const { getGroupe } = require("../bdd/groupe")
 const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../bdd/antilien")
 const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../bdd/antibot")
@@ -19,7 +19,7 @@ const { default: axios } = require('axios');
 
 
 
-timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📣" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "members", categorie: 'Group', reaction: "📣" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, arg, verifGroupe, nomGroupe, infosGroupe, nomAuteurMessage, verifAdmin, superUser } = commandeOptions
 
