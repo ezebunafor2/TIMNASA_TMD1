@@ -16,7 +16,7 @@ module.exports = { session: process.env.SESSION_ID || 'timoth',
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "non",
     AUTO_DOWNLOAD_STATUS: process.env.AUTO_DOWNLOAD_STATUS || 'non',
     AUTO_REACT: process.env.AUTO_REACTION || "non",  
-    URL: process.env.URL || "https://files.catbox.moe/snh8mc.jpeg",  
+    URL: process.env.URL || "https://files.catbox.moe/whphjs.png",  
     AUTO_REACT_STATUS: process.env.AUTO_REACT_STATUS || 'non',              
     CHATBOT: process.env.CHAT_BOT || "off",              
     AUTO_READ_MESSAGES: process.env.AUTO_READ_MESSAGES || "yes",
@@ -44,7 +44,7 @@ module.exports = { session: process.env.SESSION_ID || 'timoth',
     DATABASE_URL,
     DATABASE: DATABASE_URL === databasePath
         ? "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9" : "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9",
-    /* new Sequelize({
+    * new Sequelize({
      dialect: 'sqlite',
      storage: DATABASE_URL,
      logging: false,
