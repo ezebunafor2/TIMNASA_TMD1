@@ -1,163 +1,438 @@
-const {
-  timoth
-} = require("../timnasa/timoth");
+const { zokou } = require("../framework/zokou");
 const axios = require("axios");
 const ytSearch = require("yt-search");
-const conf = require(__dirname + "/../set");
-const getContextInfo = (_0x258510 = '', _0x297ad1 = '', _0x4f4404 = '') => ({
-  'mentionedJid': [_0x297ad1],
-  'forwardingScore': 0x3e7,
-  'isForwarded': true,
-  'forwardedNewsletterMessageInfo': {
-    'newsletterJid': "120363332512801418@newsletter",
-    'newsletterName': "𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑇𝛭𝐷 𝑆𝛩𝛮𝐺",
-    'serverMessageId': Math.floor(100000 + Math.random() * 900000)
+const ytdl = require("ytdl-core");
+const fs = require("fs");
+const path = require("path");
+const conf = require("../set");
+
+
+zokou(
+  {
+    nomCom: "movie1",
+    aliases: ["gtmovie", "mvdl"],
+    categorie: "Search",
+    reaction: "🎬",
   },
-  'externalAdReply': {
-    'showAdAttribution': true,
-    'title': conf.BOT || "YouTube Downloader",
-    'body': _0x258510 || "Media Downloader",
-    'thumbnailUrl': _0x4f4404 || conf.URL || '',
-    'sourceUrl': conf.GURL || '',
-    'mediaType': 0x1,
-    'renderLargerThumbnail': false
-  }
-});
-async function searchYouTube(_0x47c5af) {
-  try {
-    const _0x1822f9 = await ytSearch(_0x47c5af);
-    if (!_0x1822f9?.["videos"]?.["length"]) {
-      throw new Error("No video found for the specified query.");
-    }
-    return _0x1822f9.videos[0];
-  } catch (_0x430ee7) {
-    console.error("YouTube search error:", _0x430ee7);
-    throw new Error("YouTube search failed: " + _0x430ee7.message);
-  }
-}
-async function downloadFromApis(_0x29f64a) {
-  for (const _0x4aaca1 of _0x29f64a) {
+  async (jid, sock, data) => {
+    const { arg, ms } = data;
+
+    const contextInfo = {
+      forwardingScore: 999,
+      isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: "120363295141350550@newsletter",
+        newsletterName: "ALONE Queen MD V²",
+        serverMessageId: 143,
+      },
+      externalAdReply: {
+        title: "Movie Finder",
+        body: "Powered by ALONE MD V²",
+        thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+        sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+        mediaType: 1,
+        renderLargerThumbnail: false,
+      },
+    };
+
+    const repondre = async (text) => {
+      return sock.sendMessage(
+        jid,
+        {
+          text,
+          contextInfo,
+        },
+        { quoted: ms }
+      );
+    };
+
+    if (!arg[0]) return repondre("❌ Please provide a movie title.");
+
+    const query = arg.join(" ");
+    await repondre("🔍 Searching for movie and trailer...");
+
+    const apiKey = "38f19ae1"; // Replace with process.env.OMDB_API_KEY in production
+
     try {
-      const _0x2a933e = await axios.get(_0x4aaca1, {
-        'timeout': 0x3a98
-      });
-      if (_0x2a933e.data?.["success"]) {
-        return _0x2a933e.data;
-      }
-    } catch (_0x3a62e0) {
-      console.warn("API " + _0x4aaca1 + " failed:", _0x3a62e0.message);
-      continue;
+      const searchRes = await axios.get(`http://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=${apiKey}`);
+      const searchData = searchRes.data;
+
+      if (searchData.Response === "False") return repondre(`❌ Movie not found: ${searchData.Error}`);
+
+      const movieID = searchData.Search[0].imdbID;
+      const detailsRes = await axios.get(`http://www.omdbapi.com/?i=${movieID}&apikey=${apiKey}`);
+      const movie = detailsRes.data;
+
+      if (movie.Response === "False") return repondre(`❌ Error fetching movie details: ${movie.Error}`);
+
+      const ytResult = await ytSearch(`${movie.Title} trailer`);
+      const trailer = ytResult.videos.find((v) => v.seconds <= 240); // max 4 min
+
+      if (!trailer) return repondre("❌ No trailer found on YouTube.");
+
+      const trailerInfo = await ytdl.getInfo(trailer.url);
+      const format = ytdl.chooseFormat(trailerInfo.formats, { quality: "18" });
+
+      if (!format || !format.contentLength) return repondre("❌ No downloadable video format available.");
+
+      const sizeMB = parseInt(format.contentLength, 10) / (1024 * 1024);
+      if (sizeMB > 100) return repondre("❌ Trailer is too large (over 100MB).");
+
+      await sock.sendMessage(
+        jid,
+        {
+          video: { stream: ytdl(trailer.url, { quality: "18" }) },
+          caption: `🎬 *${movie.Title}* (${movie.Year})\n⭐ *IMDb:* ${movie.imdbRating}/10\n\n📖 *Plot:* ${movie.Plot}`,
+          contextInfo: {
+            forwardingScore: 999,
+            isForwarded: true,
+            externalAdReply: {
+              title: movie.Title,
+              body: "Watch the trailer",
+              thumbnailUrl: movie.Poster !== "N/A" ? movie.Poster : "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+              sourceUrl: `https://www.imdb.com/title/${movie.imdbID}`,
+              mediaType: 1,
+              renderLargerThumbnail: true,
+            },
+          },
+        },
+        { quoted: ms }
+      );
+    } catch (err) {
+      console.error("Movie trailer error:", err);
+      return repondre("❌ An error occurred. Please try again.");
     }
   }
-  throw new Error("Failed to retrieve download URL from all sources.");
-}
-timoth({
-  'nomCom': "play",
-  'aliases': ["song", "playdoc", "audio", "mp3"],
-  'categorie': "download",
-  'reaction': '🎼'
-}, async (_0x46123e, _0x14ad1a, _0x2ee1ed) => {
-  const {
-    arg: _0x34cbb1,
-    ms: _0x5a9eaa,
-    userJid: _0x16c0df
-  } = _0x2ee1ed;
+);
+zokou({
+  nomCom: "playvideo",
+  aliases: ["video", "ytvideo", "ytmp4","getmovie", "moviedl","movie"],
+  categorie: "Search",
+  reaction: "🎬",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
+
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {forwardingScore: 999,
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "120363295141350550@newsletter",
+                newsletterName: "ALONE Queen MD V²",
+                serverMessageId: 143,
+              },
+        externalAdReply: {
+          title: "ALONE MD VIDEO DOWNLOADER",
+          body: "Enjoy using ALONE MD",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          renderLargerThumbnail: false,
+        },
+      },
+    }, { quoted: ms });
+  };
+
+  if (!Array.isArray(arg) || !arg.length) return repondre("Please provide a video name.");
+  const query = arg.join(" ");
+
   try {
-    if (!_0x34cbb1[0]) {
-      return repondre(_0x14ad1a, _0x46123e, _0x5a9eaa, "Please provide a song name.");
-    }
-    const _0x26b391 = _0x34cbb1.join(" ");
-    const _0x1c20b7 = await searchYouTube(_0x26b391);
-    await _0x14ad1a.sendMessage(_0x46123e, {
-      'text': "💽 *𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝐷𝛩𝑊𝛮𝐿𝛩𝛥𝐷𝛪𝛮𝐺 𝑆𝛩𝛮𝐺.....*...",
-      'contextInfo': getContextInfo("Downloading", _0x16c0df, _0x1c20b7.thumbnail)
-    }, {
-      'quoted': _0x5a9eaa
-    });
-    const _0xc4f0b5 = ["https://api.davidcyriltech.my.id/download/ytmp3?url=" + encodeURIComponent(_0x1c20b7.url), "https://www.dark-yasiya-api.site/download/ytmp3?url=" + encodeURIComponent(_0x1c20b7.url), "https://api.giftedtech.web.id/api/download/dlmp3?url=" + encodeURIComponent(_0x1c20b7.url) + "&apikey=gifted-md", "https://api.dreaded.site/api/ytdl/audio?url=" + encodeURIComponent(_0x1c20b7.url)];
-    const _0x4446ff = await downloadFromApis(_0xc4f0b5);
-    const {
-      download_url: _0x543549,
-      title: _0x46aaeb
-    } = _0x4446ff.result;
-    const _0x20534e = [{
-      'audio': {
-        'url': _0x543549
+    const results = await ytSearch(query);
+    if (!results || !results.videos.length) return repondre("No video found for the specified query.");
+    const video = results.videos[0];
+    const videoUrl = video.url;
+
+    await sock.sendMessage(jid, {
+      text: "```Downloading video...```",
+      contextInfo: {forwardingScore: 999,
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "120363295141350550@newsletter",
+                newsletterName: "ALONE Queen MD V²",
+                serverMessageId: 143,
+              },
+        externalAdReply: {
+          title: video.title,
+          body: "Searching YouTube...",
+          thumbnailUrl: video.thumbnail,
+          sourceUrl: videoUrl,
+          mediaType: 1,
+          renderLargerThumbnail: false,
+        },
       },
-      'mimetype': "audio/mp4",
-      'caption': "🎵 *" + _0x46aaeb + '*',
-      'contextInfo': getContextInfo(_0x46aaeb, _0x16c0df, _0x1c20b7.thumbnail)
-    }, {
-      'document': {
-        'url': _0x543549
-      },
-      'mimetype': "audio/mpeg",
-      'fileName': (_0x46aaeb + ".mp3").replace(/[^\w\s.-]/gi, ''),
-      'caption': "📁 *" + _0x46aaeb + "* (Document)",
-      'contextInfo': getContextInfo(_0x46aaeb, _0x16c0df, _0x1c20b7.thumbnail)
-    }];
-    for (const _0x4c7a63 of _0x20534e) {
-      await _0x14ad1a.sendMessage(_0x46123e, _0x4c7a63, {
-        'quoted': _0x5a9eaa
-      });
+    }, { quoted: ms });
+
+    const apiUrls = [
+      `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`,
+      `https://www.dark-yasiya-api.site/download/ytmp4?url=${encodeURIComponent(videoUrl)}`,
+      `https://api.dreaded.site/api/ytdl/video?query=${encodeURIComponent(videoUrl)}`,
+      `https://youtube-download-api.matheusishiyama.repl.co/mp4/?url=${encodeURIComponent(videoUrl)}`,
+    ];
+
+    let response;
+    for (let url of apiUrls) {
+      try {
+        console.log("Trying API:", url);
+        const res = await axios.get(url);
+        console.log("Response:", JSON.stringify(res.data));
+        const link = res.data?.result?.download_url || res.data?.result?.link || res.data?.link;
+        if (link) {
+          response = {
+            title: res.data?.result?.title || res.data?.title || video.title,
+            link,
+            thumbnail: res.data?.result?.thumbnail || res.data?.thumbnail || video.thumbnail,
+          };
+          break;
+        }
+      } catch (e) {
+        console.log("API failed:", url, e.message);
+      }
     }
-  } catch (_0x357695) {
-    console.error("Audio download error:", _0x357695);
-    repondre(_0x14ad1a, _0x46123e, _0x5a9eaa, "Download failed: " + _0x357695.message);
+
+    // Final fallback using ytdl-core
+    if (!response) {
+      try {
+        const info = await ytdl.getInfo(videoUrl);
+        const format = ytdl.chooseFormat(info.formats, { quality: '18' }); // 360p mp4
+        if (format && format.url) {
+          response = {
+            title: info.videoDetails.title,
+            link: format.url,
+            thumbnail: info.videoDetails.thumbnails?.pop()?.url,
+          };
+        }
+      } catch (err) {
+        console.error("ytdl-core fallback failed:", err);
+      }
+    }
+
+    if (!response || !response.link) {
+      return repondre("All sources failed. Try again later.");
+    }
+
+    await sock.sendMessage(jid, {
+      video: { url: response.link },
+      caption: response.title,
+      mimetype: "video/mp4",
+      contextInfo: {
+        externalAdReply: {
+          title: response.title,
+          body: "Tap to watch on YouTube",
+          mediaType: 1,
+          showAdAttribution: false,
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363295141350550@newsletter',
+            newsletterName: 'ALONE  MD V²',
+            serverMessageId: 143
+          }
+        },
+      },
+    }, { quoted: ms });
+
+  } catch (err) {
+    console.error("Video Download Error:", err);
+    return repondre("Video download failed: " + (err.message || err));
   }
 });
-timoth({
-  'nomCom': "video",
-  'aliases': ["videodoc", "film", "mp4"],
-  'categorie': "download",
-  'reaction': '🎬'
-}, async (_0x377d94, _0x465ef0, _0x148c35) => {
-  const {
-    arg: _0x23f31d,
-    ms: _0x3748bd,
-    userJid: _0x46b664
-  } = _0x148c35;
+
+zokou({
+  nomCom: "lyrics",
+  aliases: ["ly", "songlyrics", "lyric"],
+  categorie: "Search",
+  reaction: "📝",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
+
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363295141350550@newsletter',
+          newsletterName: 'ALONE Queen MD V²',
+          serverMessageId: 143
+        },
+        externalAdReply: {
+          title: "🎵 ALONE MD LYRICS FINDER",
+          body: "Powered by ALONE MD V²",
+          thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+          sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+          mediaType: 1,
+          renderLargerThumbnail: false,
+        },
+      },
+    }, { quoted: ms });
+  };
+
+  if (!arg[0]) return repondre("Please provide the song name.");
+
+  const query = arg.join(" ");
+  let lyricsData = null;
+
+  const sources = [
+    async () => {
+      const res = await axios.get(`https://api.popcat.xyz/lyrics?song=${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.lyrics) throw new Error("Popcat failed");
+      return {
+        title: res.data.title,
+        author: res.data.artist,
+        lyrics: res.data.lyrics,
+        thumbnail: res.data.image,
+        link: res.data.url
+      };
+    },
+    async () => {
+      const res = await axios.get(`https://some-random-api.ml/lyrics?title=${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.lyrics) throw new Error("Some-Random-API failed");
+      return {
+        title: res.data.title,
+        author: res.data.author || "Unknown",
+        lyrics: res.data.lyrics,
+        thumbnail: res.data.thumbnail?.genius,
+        link: res.data.links?.genius
+      };
+    },
+    async () => {
+      const res = await axios.get(`https://lyrist.vercel.app/api/${encodeURIComponent(query)}`).catch(() => null);
+      if (!res || !res.data || !res.data.content) throw new Error("Lyrist failed");
+      return {
+        title: query,
+        author: "Unknown",
+        lyrics: res.data.content,
+        thumbnail: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+        link: "https://github.com/Zokou1/ALONE-MD"
+      };
+    }
+  ];
+
+  for (const fetchLyrics of sources) {
+    try {
+      const data = await fetchLyrics();
+      if (data && data.lyrics) {
+        lyricsData = data;
+        break;
+      }
+    } catch (err) {
+      console.log("Lyrics source failed:", err.message);
+    }
+  }
+
+  if (!lyricsData) return repondre("Couldn't find lyrics from any source. Try again with a different song title.");
+
+  const { title, author, lyrics, thumbnail, link } = lyricsData;
+  const message = `*🎵 Title:* ${title}\n*👤 Artist:* ${author}\n\n${lyrics.slice(0, 4096)}`;
+
+  await sock.sendMessage(jid, {
+    image: { url: thumbnail },
+    caption: message,
+    contextInfo: {
+      externalAdReply: {
+        title: title,
+        body: `By ${author}`,
+        mediaType: 1,
+        thumbnailUrl: thumbnail,
+        sourceUrl: link,
+        renderLargerThumbnail: false,
+      },
+    },
+  }, { quoted: ms });
+});
+
+
+zokou({
+  nomCom: "play",
+  aliases: ["song", "ytmp3", "audio", "mp3"],
+  categorie: "Search",
+  reaction: "⬇️",
+}, async (jid, sock, data) => {
+  const { arg, ms } = data;
+
+  const repondre = async (text) => {
+    await sock.sendMessage(jid, {
+      text,
+      contextInfo: {forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
+          body: "Powered by ALONE MD V²",
+          thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
+          sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+          mediaType: 1,
+          renderLargerThumbnail: false,
+          showAdAttribution: false,
+        },
+      },
+    }, { quoted: ms });
+  };
+
+  if (!arg[0]) return repondre("Please provide a Audio name.");
+  const query = arg.join(" ");
+
   try {
-    if (!_0x23f31d[0]) {
-      return repondre(_0x465ef0, _0x377d94, _0x3748bd, "Please provide a video name.");
-    }
-    const _0xd64eb4 = _0x23f31d.join(" ");
-    const _0x4ca720 = await searchYouTube(_0xd64eb4);
-    await _0x465ef0.sendMessage(_0x377d94, {
-      'text': "🖥️ *𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑇𝛭𝐷 𝐷𝛩𝑊𝛮𝐿𝛩𝛥𝐷𝛪𝛮𝐺 𝛻𝛪𝐷𝛯𝛩*...",
-      'contextInfo': getContextInfo("Downloading", _0x46b664, _0x4ca720.thumbnail)
-    }, {
-      'quoted': _0x3748bd
-    });
-    const _0x304ee0 = ["https://api.davidcyriltech.my.id/download/ytmp4?url=" + encodeURIComponent(_0x4ca720.url), "https://www.dark-yasiya-api.site/download/ytmp4?url=" + encodeURIComponent(_0x4ca720.url), "https://api.giftedtech.web.id/api/download/dlmp4?url=" + encodeURIComponent(_0x4ca720.url) + "&apikey=gifted-md", "https://api.dreaded.site/api/ytdl/video?url=" + encodeURIComponent(_0x4ca720.url)];
-    const _0x380408 = await downloadFromApis(_0x304ee0);
-    const {
-      download_url: _0x50b9ff,
-      title: _0x5e9cb6
-    } = _0x380408.result;
-    const _0x2a716f = [{
-      'video': {
-        'url': _0x50b9ff
+    const results = await ytSearch(query);
+    if (!results || !results.videos.length)
+      return repondre("No audio found for the specified query.");
+
+    const video = results.videos[0];
+    const videoUrl = video.url;
+    const title = video.title;
+
+    // Attempt to split title into artist and song
+    const [artist, songTitle] = title.includes(" - ") ? title.split(" - ", 2) : ["Unknown Artist", title];
+
+    await sock.sendMessage(jid, { text: "```Downloading....```" }, { quoted: ms });
+
+    const tryApi = async (url) => {
+      try {
+        const res = await axios.get(url);
+        return res.data;
+      } catch {
+        return { success: false };
+      }
+    };
+
+    let response =
+      await tryApi(`https://apis.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(videoUrl)}&apikey=gifted-md`)
+      || await tryApi(`https://www.dark-yasiya-api.site/download/ytmp3?url=${encodeURIComponent(videoUrl)}`)
+      || await tryApi(`https://api.dreaded.site/api/ytdl/video?query=${encodeURIComponent(videoUrl)}`);
+
+    if (!response.success) return repondre("All sources failed. Try again later.");
+
+    const { download_url, thumbnail } = response.result;
+
+    await sock.sendMessage(jid, {
+      audio: { url: download_url },
+      mimetype: "audio/mp4",
+      contextInfo: {
+        externalAdReply: {
+          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
+          body: `🎵 ${artist} - ${songTitle}`,
+          mediaType: 1,
+          thumbnailUrl: thumbnail,
+          sourceUrl: videoUrl,
+          renderLargerThumbnail: false,
+          showAdAttribution: false,
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363295141350550@newsletter',
+            newsletterName: 'ALONE  MD V²',
+            serverMessageId: 143
+          }
+        },
       },
-      'mimetype': "video/mp4",
-      'caption': "🎥 *" + _0x5e9cb6 + '*',
-      'contextInfo': getContextInfo(_0x5e9cb6, _0x46b664, _0x4ca720.thumbnail)
-    }, {
-      'document': {
-        'url': _0x50b9ff
-      },
-      'mimetype': "video/mp4",
-      'fileName': (_0x5e9cb6 + ".mp4").replace(/[^\w\s.-]/gi, ''),
-      'caption': "📁 *" + _0x5e9cb6 + "* (Document)",
-      'contextInfo': getContextInfo(_0x5e9cb6, _0x46b664, _0x4ca720.thumbnail)
-    }];
-    for (const _0x350613 of _0x2a716f) {
-      await _0x465ef0.sendMessage(_0x377d94, _0x350613, {
-        'quoted': _0x3748bd
-      });
-    }
-  } catch (_0x53705e) {
-    console.error("Video download error:", _0x53705e);
-    repondre(_0x465ef0, _0x377d94, _0x3748bd, "Download failed: " + _0x53705e.message);
+    }, { quoted: ms });
+
+  } catch (err) {
+    console.error("Download Error:", err);
+    return repondre("Download failed: " + (err.message || err));
   }
 });
