@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 const { downloadAndSaveMediaMessage } = require('@whiskeysockets/baileys'); 
 
 timoth({ 
-  nomCom: "p", 
+  nomCom: "music", 
   aliases: ["song", "playdoc", "audio", "mp3"], 
   categorie: "download", 
   reaction: "🎧" 
