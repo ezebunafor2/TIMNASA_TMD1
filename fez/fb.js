@@ -4,7 +4,7 @@ const getFBInfo = require("@xaviabot/fb-downloader");
 const { default: axios } = require('axios');
 
 timoth({
-  nomCom: "face",
+  nomCom: "fboock",
   categorie: "Download",
   reaction: "🎬"
 },
@@ -31,8 +31,8 @@ async (dest, zk, commandeOptions) => {
          contextInfo: {
          isForwarded: true,
          forwardedNewsletterMessageInfo: {
-         newsletterJid: '120363345407274799@newsletter',
-         newsletterName: "NJABULO JB",
+         newsletterJid: '120363332512801418@newsletter',
+         newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳",
          serverMessageId: 143,
            {
          }
@@ -42,8 +42,8 @@ async (dest, zk, commandeOptions) => {
          contextInfo: {
          isForwarded: true,
          forwardedNewsletterMessageInfo: {
-         newsletterJid: '120363345407274799@newsletter',
-         newsletterName: "NJABULO JB",
+         newsletterJid: '120363332512801418@newsletter',
+         newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
          serverMessageId: 143,
         }
       },
