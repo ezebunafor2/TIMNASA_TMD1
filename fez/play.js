@@ -1,4 +1,4 @@
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const axios = require("axios");
 const ytSearch = require("yt-search");
 const ytdl = require("ytdl-core");
@@ -7,9 +7,9 @@ const path = require("path");
 const conf = require("../set");
 
 
-zokou(
+timoth(
   {
-    nomCom: "movie1",
+    nomCom: "session",
     aliases: ["gtmovie", "mvdl"],
     categorie: "Search",
     reaction: "🎬",
@@ -21,15 +21,15 @@ zokou(
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: "120363295141350550@newsletter",
-        newsletterName: "ALONE Queen MD V²",
+        newsletterJid: "120363332512801418@newsletter",
+        newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
         serverMessageId: 143,
       },
       externalAdReply: {
         title: "Movie Finder",
-        body: "Powered by ALONE MD V²",
+        body: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
         thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
-        sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+        sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
         mediaType: 1,
         renderLargerThumbnail: false,
       },
@@ -104,8 +104,8 @@ zokou(
     }
   }
 );
-zokou({
-  nomCom: "playvideo",
+timoth({
+  nomCom: "video",
   aliases: ["video", "ytvideo", "ytmp4","getmovie", "moviedl","movie"],
   categorie: "Search",
   reaction: "🎬",
@@ -118,13 +118,13 @@ zokou({
       contextInfo: {forwardingScore: 999,
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363295141350550@newsletter",
-                newsletterName: "ALONE Queen MD V²",
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯",
                 serverMessageId: 143,
               },
         externalAdReply: {
-          title: "ALONE MD VIDEO DOWNLOADER",
-          body: "Enjoy using ALONE MD",
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
           thumbnailUrl: conf.URL,
           mediaType: 1,
           renderLargerThumbnail: false,
@@ -143,12 +143,12 @@ zokou({
     const videoUrl = video.url;
 
     await sock.sendMessage(jid, {
-      text: "```Downloading video...```",
+      text: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯",
       contextInfo: {forwardingScore: 999,
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363295141350550@newsletter",
-                newsletterName: "ALONE Queen MD V²",
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯",
                 serverMessageId: 143,
               },
         externalAdReply: {
@@ -223,8 +223,8 @@ zokou({
           forwardingScore: 999,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363295141350550@newsletter',
-            newsletterName: 'ALONE  MD V²',
+            newsletterJid: '120363332512801418@newsletter',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝛁𝚰𝐃𝚵𝚯',
             serverMessageId: 143
           }
         },
@@ -237,8 +237,8 @@ zokou({
   }
 });
 
-zokou({
-  nomCom: "lyrics",
+timoth({
+  nomCom: "playtext",
   aliases: ["ly", "songlyrics", "lyric"],
   categorie: "Search",
   reaction: "📝",
@@ -252,15 +252,15 @@ zokou({
         forwardingScore: 999,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363295141350550@newsletter',
-          newsletterName: 'ALONE Queen MD V²',
+          newsletterJid: '120363332512801418@newsletter',
+          newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝐋𝚰𝐘𝐂𝚪𝐂𝐒',
           serverMessageId: 143
         },
         externalAdReply: {
-          title: "🎵 ALONE MD LYRICS FINDER",
-          body: "Powered by ALONE MD V²",
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝐋𝚰𝐘𝐂𝚪𝐂𝐒",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
           thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
-          sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+          sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
           mediaType: 1,
           renderLargerThumbnail: false,
         },
@@ -304,7 +304,7 @@ zokou({
         author: "Unknown",
         lyrics: res.data.content,
         thumbnail: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
-        link: "https://github.com/Zokou1/ALONE-MD"
+        link: "https://files.catbox.moe/oglf4q.jpg"
       };
     }
   ];
@@ -343,7 +343,7 @@ zokou({
 });
 
 
-zokou({
+timoth({
   nomCom: "play",
   aliases: ["song", "ytmp3", "audio", "mp3"],
   categorie: "Search",
@@ -357,14 +357,14 @@ zokou({
       contextInfo: {forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363295141350550@newsletter',
-              newsletterName: 'ALONE Queen MD V²',
+              newsletterJid: '120363332512801418@newsletter',
+              newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘',
               serverMessageId: 143},
         externalAdReply: {
-          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
-          body: "Powered by ALONE MD V²",
+          title: "📈𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝚫𝐔𝐃𝚰𝚯📉",
+          body: "ᴘᴏᴡᴇʀ ʙʏ ᴛɪᴍɴᴀsᴀᴛᴇᴄʜ ᴀɪ",
           thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
-          sourceUrl: "https://github.com/Zokou1/ALONE-MD",
+          sourceUrl: "https://files.catbox.moe/oglf4q.jpg",
           mediaType: 1,
           renderLargerThumbnail: false,
           showAdAttribution: false,
@@ -413,7 +413,7 @@ zokou({
       mimetype: "audio/mp4",
       contextInfo: {
         externalAdReply: {
-          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
+          title: "📈𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘 𝚫𝐔𝐃𝚰𝚯📉",
           body: `🎵 ${artist} - ${songTitle}`,
           mediaType: 1,
           thumbnailUrl: thumbnail,
@@ -423,8 +423,8 @@ zokou({
           forwardingScore: 999,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363295141350550@newsletter',
-            newsletterName: 'ALONE  MD V²',
+            newsletterJid: '120363332512801418@newsletter',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚸𝐋𝚫𝐘',
             serverMessageId: 143
           }
         },
