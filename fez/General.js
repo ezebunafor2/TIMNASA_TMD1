@@ -1,5 +1,5 @@
 const { timoth } = require("../timnasa/timoth");
-const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../bdd/sudo")
+const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../database/sudo")
 const conf = require("../set");
 
 timoth({ nomCom: "owner", categorie: "General", reaction: "🤝" }, async (dest, zk, commandeOptions) => {
