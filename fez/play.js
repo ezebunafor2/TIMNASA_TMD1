@@ -1,10 +1,9 @@
-const { timoth } = require("../timnasa/timoth");
-const axios = require("axios");
-const ytSearch = require("yt-search");
-const ytdl = require("ytdl-core");
-const fs = require("fs");
-const path = require("path");
-const conf = require("../set");
+//const { timoth } = require("../timnasa/timoth");
+//const axios = require("axios")const ytSearch = require("yt-search");
+//const ytdl = require("ytdl-core");
+//const fs = require("fs");
+//const path = require("path");
+//const conf = require("../set");
 
 
 timoth(
@@ -17,7 +16,7 @@ timoth(
   async (jid, sock, data) => {
     const { arg, ms } = data;
 
-    const contextInfo = {
+  //  const contextInfo = {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
@@ -35,7 +34,7 @@ timoth(
       },
     };
 
-    const repondre = async (text) => {
+   // const repondre = async (text) => {
       return sock.sendMessage(
         jid,
         {
