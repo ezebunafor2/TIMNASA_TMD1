@@ -1,14 +1,8 @@
-
-
-
-
-
-
 const { timoth } = require("../timnasa/timoth")
-const { getGroupe } = require("../bdd/groupe")
+const { getGroupe } = require("../data/groupe")
 const { Sticker, StickerTypes } = require('wa-sticker-formatter');
-const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../bdd/antilien")
-const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../bdd/antibot")
+const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../data/antilien")
+const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../data/antibot")
 const { search, download } = require("aptoide-scraper");
 const fs = require("fs-extra");
 const conf = require("../set");
@@ -255,7 +249,7 @@ timoth({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, as
         if (zkad) {
           if (membre) {
             if (admin == false) {
-              const gifLink = "https://raw.githubusercontent.com/djalega8000/Zokou-MD/main/media/remover.gif"
+              const gifLink = "https://raw.githubusercontent.com/mr-X-force/LUCKY-MD-XFORCE/main/media/remover.gif"
               var sticker = new Sticker(gifLink, {
                 pack: 'Zokou-Md', // The pack name
                 author: nomAuteurMessage, // The author name
