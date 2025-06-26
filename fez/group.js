@@ -1,19 +1,9 @@
-
-
-const { timoth } = require("../timnasa/timoth")
-//const { getGroupe } = require("../bdd/groupe")
-const { Sticker, StickerTypes } = require('wa-sticker-formatter');
-const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../bdd/antilien")
-const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../bdd/antibot")
-const { search, download } = require("aptoide-scraper");
-const fs = require("fs-extra");
-const conf = require("../set");
-const { default: axios } = require('axios');
-//const { uploadImageToImgur } = require('../timnasa/imgur');
-
-
-
-
+const { timoth } = require("../timnasa/timoth");
+const { downloadMediaMessage, downloadContentFromMessage } = require("@whiskeysockets/baileys");
+const { exec } = require('child_process');
+const { writeFile } = require("fs/promises");
+const fs = require('fs-extra');
+const moment = require("moment-timezone");
 
 timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📯" }, async (dest, zk, commandeOptions) => {
 
