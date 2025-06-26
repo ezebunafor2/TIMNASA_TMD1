@@ -7,7 +7,7 @@ const gis = require('g-i-s');
 
 
 timoth({
-  'nomCom': 'apk',
+  'nomCom': 'istall/app',
   'aliases': ['app', 'playstore'],
   'reaction': '🉑',
   'categorie': 'Download'
