@@ -1,10 +1,10 @@
 const {
-  zokou
-} = require("../framework/zokou");
+  timoth
+} = require("../timnasa/timoth");
 const {
   default: axios
 } = require("axios");
-zokou({
+timoth({
   'nomCom': "gta",
   'reaction': '🛰️',
   'categorie': 'AI'
@@ -24,7 +24,7 @@ zokou({
       'image': {
         'url': _0x93b128
       },
-      'caption': "*powered by RAHMANI MD*"
+      'caption': "*powered by TimnasaTech*"
     }, {
       'quoted': _0x4eb9fe
     });
