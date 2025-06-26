@@ -709,7 +709,7 @@ timoth({
   }
 });
 timoth({
-  nomCom: 'chatbot',
+  nomCom: 'chatbot2',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
   const { ms, repondre, superUser, auteurMessage, arg } = context;
