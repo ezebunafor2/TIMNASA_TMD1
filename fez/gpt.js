@@ -1,7 +1,7 @@
 const { timoth } = require('../timnasa/timoth');
 const traduire = require("../timnasa/traduction") ;
-const { default: axios } = require('axios');
-//const conf = require('../set');
+const { default: fs } = require('fs');
+const conf = require('../set');
 
 
 
