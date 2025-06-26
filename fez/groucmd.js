@@ -12,11 +12,11 @@ const {
   ajouterOuMettreAJourJid,
   mettreAJourAction,
   verifierEtatJid
-} = require('../database/antilien');
+} = require('../data/antilien');
 const {
   atbajouterOuMettreAJourJid,
   atbverifierEtatJid
-} = require('../database/antibot');
+} = require('../data/antibot');
 const {
   search,
   download
