@@ -2,8 +2,8 @@ const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter')
 const { timoth } = require("../timnasa/timoth");
 const traduire = require("../timnasa/traduction");
 const { downloadMediaMessage,downloadContentFromMessage } =  require('@whiskeysockets/baileys');
-const fs =require("fs-extra") ;
-const axios = require('axios');  
+const fs =require("fs") ;
+//const axios = require('axios');  
 const FormData = require('form-data');
 const { exec } = require("child_process");
 
