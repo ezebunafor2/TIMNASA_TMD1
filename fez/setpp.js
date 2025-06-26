@@ -6,7 +6,7 @@ const fs = require("fs");
 timoth({
   nomCom: "setpp",
   aliases: ["updatepp", "ppfull"],
-  reaction: '⚔️',
+  reaction: '📊,
   categorie: "search"
 }, async (dest, zk, commandeOptions) => {
   const { repondre, msgRepondu, auteurMessage } = commandeOptions;
