@@ -1,7 +1,7 @@
 
 
 
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const s = require("../set");
 const fs = require('fs');
 const Heroku = require('heroku-client');
@@ -15,7 +15,7 @@ function getDescriptionFromEnv(varName) {
 }
 
 // Anti-call function setup
-zokou({
+timoth({
   nomCom: 'anticall',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -23,7 +23,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("thís cσmmαnd ís rєstríctєd tσ thє вσt σwnєr. σr Rahmani хmd σwnєr");
+    return repondre("This command for owner only or timnasa");
   }
 
   // Validate user input and respond accordingly
@@ -57,7 +57,7 @@ zokou({
 });
 
 
-zokou({
+timoth({
   nomCom: 'areact',
   categorie: "General"
 }, async (chatId, zk, context) => {
@@ -65,7 +65,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("thís cσmmαnd ís rєstríctєd tσ thє вσt σwnєr. σr ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ  σwnєr");
+    return repondre("This command for owner only ot TimnasaTech");
   }
 
   // Validate user input and respond accordingly
@@ -98,7 +98,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'readstatus',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -106,7 +106,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("thís cσmmαnd ís rєstríctєd tσ thє вσt σwnєr. σr ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ σwnє");
+    return repondre("This command for owner only ot TimnasaTech");
   }
 
   // Validate user input and respond accordingly
@@ -138,7 +138,7 @@ zokou({
     await zk.sendMessage(chatId, { text: 'Error processing your request.' }, { quoted: ms });
   }
 });
-zokou({
+timoth({
   nomCom: 'antidelete',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -146,7 +146,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command for owner only ot TimnasaTech🖕😖");
   }
 
   // Validate user input and respond accordingly
@@ -179,7 +179,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'downloadstatus',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -187,7 +187,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command for owner only ot TimnasaTech🖕😖");
   }
 
   // Validate user input and respond accordingly
@@ -220,7 +220,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'startmessage',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -228,7 +228,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command for owner only ot TimnasaTech🖕😖*");
   }
 
   // Validate user input and respond accordingly
@@ -261,7 +261,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'readmessage',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -269,7 +269,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -302,7 +302,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'pm-permit',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -310,7 +310,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -342,7 +342,7 @@ zokou({
     await zk.sendMessage(chatId, { text: 'Error processing your request.' }, { quoted: ms });
   }
 });
-zokou({
+timoth({
   nomCom: 'chatbot',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -350,7 +350,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command for owner only ot TimnasaTech🖕😖*");
   }
 
   // Validate user input and respond accordingly
@@ -382,7 +382,7 @@ zokou({
     await zk.sendMessage(chatId, { text: 'Error processing your request.' }, { quoted: ms });
   }
 });
-zokou({
+timoth({
   nomCom: 'greet',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -390,7 +390,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -423,7 +423,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'antivv',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -464,7 +464,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'publicmode',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -505,7 +505,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'autorecord',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -513,7 +513,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -546,7 +546,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'autotyping',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -554,7 +554,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -587,7 +587,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'alwaysonline',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -595,7 +595,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or Rahmani-Md owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -628,7 +628,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'privatemode',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -636,7 +636,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -668,7 +668,7 @@ zokou({
     await zk.sendMessage(chatId, { text: 'Error processing your request.' }, { quoted: ms });
   }
 });
-zokou({
+timoth({
   nomCom: 'autolikestatus',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -676,7 +676,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or TimnasaTech.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -708,7 +708,7 @@ zokou({
     await zk.sendMessage(chatId, { text: 'Error processing your request.' }, { quoted: ms });
   }
 });
-zokou({
+timoth({
   nomCom: 'chatbot',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, zk, context) => {
@@ -716,7 +716,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ owner.* 💀,,idiot");
+    return repondre("*This command is restricted to the bot owner or timoth.* 💀,,idiot");
   }
 
   // Validate user input and respond accordingly
@@ -749,7 +749,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: 'settings',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, messagingService, context) => {
@@ -794,7 +794,7 @@ zokou({
   });
 
   const selectedOption = settingsOptions[userChoice.message.extendedTextMessage.text - 1];
-  let settingsDetail = `╭──────༺♡༻──────╮\n  ɪᴛ ᴋᴀᴊᴜ ᴛᴍᴅ\n╰──────༺♡༻──────╯\n\n`;
+  let settingsDetail = `╭──────༺♡༻──────╮\n  TimnasaTech ༺♡༻──────╯\n\n`;
   settingsDetail += `*Variable Name* : ${selectedOption.nom}\n`;
   settingsDetail += `*Description* : ${getDescriptionFromEnv(selectedOption.nom)}\n\n`;
   settingsDetail += "┌────── ⋆⋅☆⋅⋆ ──────┐\n\n";
