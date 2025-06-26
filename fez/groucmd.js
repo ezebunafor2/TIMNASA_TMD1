@@ -2,8 +2,8 @@ const {
   exec
 } = require("child_process");
 const {
-  ezra
-} = require("../fredi/ezra");
+  timoth
+} = require("../timnasa/timoth");
 const {
   Sticker,
   StickerTypes
@@ -12,11 +12,11 @@ const {
   ajouterOuMettreAJourJid,
   mettreAJourAction,
   verifierEtatJid
-} = require('../luckydatabase/antilien');
+} = require('../database/antilien');
 const {
   atbajouterOuMettreAJourJid,
   atbverifierEtatJid
-} = require('../luckydatabase/antibot');
+} = require('../database/antibot');
 const {
   search,
   download
@@ -30,7 +30,7 @@ const {
   getBinaryNodeChild,
   getBinaryNodeChildren
 } = require("@whiskeysockets/baileys")['default'];
-  ezra({
+  timoth({
   'nomCom': 'add',
   'categorie': "Group",
   'reaction': '🪄'
@@ -164,7 +164,7 @@ const {
   }
 });
 
-ezra({
+timoth({
   'nomCom': "broadcast",
   'aliases': ['bc', "cast"],
   'reaction': '📑',
@@ -201,8 +201,8 @@ ezra({
   }
 });
 
-ezra({
-  'nomCom': "disap-off",
+timoth({
+  'nomCom': "disap-opp",
   'categorie': "Group",
   'reaction': '😇'
 }, async (_0x1f053f, _0x40fcb7, _0x521ba1) => {
@@ -231,8 +231,8 @@ ezra({
   _0x331c17("Dissapearing messages successfully turned off!");
 });
 
-ezra({
-  'nomCom': "disap",
+timoth({
+  'nomCom': "disapoint",
   'categorie': "Group",
   'reaction': '😇'
 }, async (_0x541352, _0x3aeb98, _0x44eb36) => {
@@ -260,8 +260,8 @@ ezra({
   _0x59b8c1("*Do you want to turn on disappearing messages?*\n\nIf yes type _*disap1* for messages to disappear after 1 day._\n_or *disap7* for messages to disappear after 7 days._\n_or *disap90* for messages to disappear after 90 days._\n\n To turn in off, type *disap-off*");
 });
 
-ezra({
-  'nomCom': "req",
+timoth({
+  'nomCom': "request",
   'categorie': 'Group',
   'reaction': '😇'
 }, async (_0x3f37d6, _0x3d6273, _0x16b776) => {
@@ -303,8 +303,8 @@ ezra({
   _0x31754e(_0x4143c3);
 });
 
-ezra({
-  'nomCom': 'disap90',
+timoth({
+  'nomCom': 'disap200',
   'categorie': "Group",
   'reaction': '😇'
 }, async (_0x58e845, _0x202cf5, _0x2bdac3) => {
@@ -333,8 +333,8 @@ ezra({
   _0x58e845("Dissapearing messages successfully turned on for 90 days!");
 });
 
-ezra({
-  'nomCom': "reject",
+timoth({
+  'nomCom': "rejected",
   'aliases': ["rejectall", "rej", "reject-all"],
   'categorie': "Group",
   'reaction': '😇'
@@ -363,8 +363,8 @@ ezra({
   _0x241d6c("All pending join requests have been rejected.");
 });
 
-ezra({
-  'nomCom': 'disap7',
+timoth({
+  'nomCom': 'disap70',
   'categorie': "Group",
   'reaction': '😇'
 }, async (_0xdb7461, _0x152ba7, _0x3f9021) => {
@@ -393,8 +393,8 @@ ezra({
   _0xdb7461("Dissapearing messages successfully turned on for 7 days!");
 });
 
-ezra({
-  'nomCom': "disap1",
+timoth({
+  'nomCom': "disap11",
   'categorie': "Group",
   'reaction': '🪄'
 }, async (_0x5c9d47, _0x445664, _0x4266de) => {
@@ -423,8 +423,8 @@ ezra({
   _0x5c9d47("Dissapearing messages successfully turned on for 24 hours");
 });
 
-ezra({
-  'nomCom': 'approve',
+timoth({
+  'nomCom': 'approved',
   'aliases': ["approve-all", "accept"],
   'categorie': "Group",
   'reaction': '🔎'
@@ -453,8 +453,8 @@ ezra({
   _0x298913("All pending participants have been approved to join by Lucky md.");
 });
 
-ezra({
-  'nomCom': "vcf",
+timoth({
+  'nomCom': "vcf10",
   'aliases': ["savecontact", "savecontacts"],
   'categorie': "Group",
   'reaction': '♻️'
@@ -501,7 +501,7 @@ ezra({
   }
 });
 
-ezra({
+timoth({
   'nomCom': 'invite',
   'aliases': ["link"],
   'categorie': 'Group',
@@ -528,7 +528,7 @@ ezra({
   }
 });
 
-ezra({  
+timoth({  
   'nomCom': 'revoke',
   'categorie': 'Group'
 }, async (_0x5cf31f, _0x499fc5, _0x27df3d) => {
@@ -551,7 +551,7 @@ ezra({
   _0x1e4f60("group link revoked.");
 });
 
-ezra({
+timoth({
   'nomCom': "antiword",
   'categorie': 'Group',
   'reaction': '🔗'
@@ -611,7 +611,7 @@ ezra({
   }
 });
 
-ezra({
+timoth({
   'nomCom': "antilink-all",
   'categorie': "Group",
   'reaction': '🕯️'
