@@ -1,4 +1,4 @@
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const axios = require("axios");
 const ytSearch = require("yt-search");
 const ytdl = require("ytdl-core");
@@ -7,7 +7,7 @@ const path = require("path");
 const conf = require("../set");
 
 
-zokou(
+timoth(
   {
     nomCom: "movie1",
     aliases: ["gtmovie", "mvdl"],
@@ -104,7 +104,7 @@ zokou(
     }
   }
 );
-zokou({
+timoth({
   nomCom: "playvideo",
   aliases: ["video", "ytvideo", "ytmp4","getmovie", "moviedl","movie"],
   categorie: "Search",
@@ -237,7 +237,7 @@ zokou({
   }
 });
 
-zokou({
+timoth({
   nomCom: "lyrics",
   aliases: ["ly", "songlyrics", "lyric"],
   categorie: "Search",
@@ -343,7 +343,7 @@ zokou({
 });
 
 
-zokou({
+timoth({
   nomCom: "play",
   aliases: ["song", "ytmp3", "audio", "mp3"],
   categorie: "Search",
