@@ -21,13 +21,13 @@ timoth(
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: "120363295141350550@newsletter",
-        newsletterName: "ALONE Queen MD V²",
+        newsletterJid: "120363332512801418@newsletter",
+        newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
         serverMessageId: 143,
       },
       externalAdReply: {
-        title: "Movie Finder",
-        body: "Powered by ALONE MD V²",
+        title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚳𝚯𝛁𝚰𝚵𝐒",
+        body: "Powered by 𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
         thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
         sourceUrl: "https://github.com/Zokou1/ALONE-MD",
         mediaType: 1,
@@ -105,7 +105,7 @@ timoth(
   }
 );
 timoth({
-  nomCom: "playvideo",
+  nomCom: "video",
   aliases: ["video", "ytvideo", "ytmp4","getmovie", "moviedl","movie"],
   categorie: "Search",
   reaction: "🎬",
@@ -118,13 +118,13 @@ timoth({
       contextInfo: {forwardingScore: 999,
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363295141350550@newsletter",
-                newsletterName: "ALONE Queen MD V²",
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯𝐒",
                 serverMessageId: 143,
               },
         externalAdReply: {
-          title: "ALONE MD VIDEO DOWNLOADER",
-          body: "Enjoy using ALONE MD",
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯𝐒 DOWNLOADER",
+          body: "ENJOY TIMNASA_TMD",
           thumbnailUrl: conf.URL,
           mediaType: 1,
           renderLargerThumbnail: false,
@@ -147,8 +147,8 @@ timoth({
       contextInfo: {forwardingScore: 999,
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363295141350550@newsletter",
-                newsletterName: "ALONE Queen MD V²",
+                newsletterJid: "120363332512801418@newsletter",
+                newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯𝐒",
                 serverMessageId: 143,
               },
         externalAdReply: {
@@ -223,8 +223,8 @@ timoth({
           forwardingScore: 999,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363295141350550@newsletter',
-            newsletterName: 'ALONE  MD V²',
+            newsletterJid: '120363332512801418@newsletter',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝛁𝚰𝐃𝚵𝚯𝐒',
             serverMessageId: 143
           }
         },
@@ -237,13 +237,13 @@ timoth({
   }
 });
 
-timoth({
+//timoth({
   nomCom: "lyrics",
   aliases: ["ly", "songlyrics", "lyric"],
   categorie: "Search",
   reaction: "📝",
 }, async (jid, sock, data) => {
-  const { arg, ms } = data;
+//  const { arg, ms } = data;
 
   const repondre = async (text) => {
     await sock.sendMessage(jid, {
@@ -270,7 +270,7 @@ timoth({
 
   if (!arg[0]) return repondre("Please provide the song name.");
 
-  const query = arg.join(" ");
+//  const query = arg.join(" ");
   let lyricsData = null;
 
   const sources = [
@@ -361,7 +361,7 @@ timoth({
               newsletterName: 'ALONE Queen MD V²',
               serverMessageId: 143},
         externalAdReply: {
-          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
+          title: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚫𝐔𝐃𝚰𝚯𝐒 𝚸𝐋𝚫𝐘 DOWNLOADER",
           body: "Powered by ALONE MD V²",
           thumbnailUrl: "https://telegra.ph/file/94f5c37a2b1d6c93a97ae.jpg",
           sourceUrl: "https://github.com/Zokou1/ALONE-MD",
@@ -413,7 +413,7 @@ timoth({
       mimetype: "audio/mp4",
       contextInfo: {
         externalAdReply: {
-          title: "♻️ ALONE MD AUDIO DOWNLOADER ♻️",
+          title: "♻️𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃 𝚫𝐔𝐃𝚰𝚯𝐒 𝚸𝐋𝚫𝐘 DOWNLOADER ♻️",
           body: `🎵 ${artist} - ${songTitle}`,
           mediaType: 1,
           thumbnailUrl: thumbnail,
@@ -424,7 +424,7 @@ timoth({
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
             newsletterJid: '120363295141350550@newsletter',
-            newsletterName: 'ALONE  MD V²',
+            newsletterName: '𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳D',
             serverMessageId: 143
           }
         },
