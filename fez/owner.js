@@ -1,6 +1,6 @@
-const { zokou } = require("../framework/zokou"); const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../luckydatabase/sudo") const conf = require("../set");
+const { timoth } = require("../timnasa/timoth"); const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../database/sudo") const conf = require("../set");
 
-zokou({ nomCom: "owner", categorie: "Devs", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms , mybotpic } = commandeOptions;
+timoth({ nomCom: "owner", categorie: "Devs", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms , mybotpic } = commandeOptions;
 
 const thsudo = await isSudoTableNotEmpty()
 
@@ -17,7 +17,7 @@ for ( const sudo of sudos) { if (sudo) { sudonumero = sudo.replace(/[^0-9]/g, ''
 
 }   const ownerjid = conf.NUMERO_OWNER.replace(/[^0-9]/g) + "@s.whatsapp.net"; const mentionedJid = sudos.concat([ownerjid]) console.log(sudos); console.log(mentionedJid) zk.sendMessage( dest, { image : { url : mybotpic() }, caption : msg, mentions : mentionedJid } ) } else { const vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + conf.OWNER_NAME + '\n' + 'ORG:undefined;\n' + 'TEL;type=CELL;type=VOICE;waid=' + conf.NUMERO_OWNER + ':+' + conf.NUMERO_OWNER + '\n' + 'END:VCARD'; zk.sendMessage(dest, { contacts: { displayName: conf.OWNER_NAME, contacts: [{ vcard }], }, },{quoted:ms}); } });
 
-zokou({ nomCom: "dev", categorie: "Devs", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms, mybotpic } = commandeOptions;
+timoth({ nomCom: "dev", categorie: "Devs", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms, mybotpic } = commandeOptions;
 
 const devs = [
   { nom: "Rahmani", numero: "255693629079" },
@@ -33,17 +33,17 @@ var lien = mybotpic() if (lien.match(/.(mp4|gif)$/i)) { try { zk.sendMessage(des
 
 } });
 
-zokou({ nomCom: "support", categorie: "Devs" }, async (dest, zk, commandeOptions) => { const { ms, repondre, auteurMessage, } = commandeOptions;
+//timoth({ nomCom: "support", categorie: "Devs" }, async (dest, zk, commandeOptions) => { const { ms, repondre, auteurMessage, } = commandeOptions;
 
 repondre("look on pm sir ") await zk.sendMessage(auteurMessage,{text :https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f},{quoted :ms})
 
 })
 
-zokou({ nomCom: "developer", categorie: "General", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms, mybotpic } = commandeOptions;
+timoth({ nomCom: "developer", categorie: "General", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms, mybotpic } = commandeOptions;
 
 const devs = [
-  { nom: "Rahmani", numero: "255693629079" },
-  { nom: "Qart", numero: "255613300056" },
+  { nom: "TimnasaTech", numero: "+255784766591" },
+  { nom: "Queen TimnasaTech", numero: "+260767063077" },
 ];
 
 let message = "*Holla Welcome to Rahmani-Md here is the developer numbers:*\n\n";
