@@ -1,11 +1,9 @@
-const { timoth } = require("../timnasa/timoth")
-//const { getGroupe } = require("../bdd/groupe")
-const { Sticker, StickerTypes } = require('wa-sticker-formatter');
-const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../bdd/antilien")
-const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../bdd/antibot")
-const fs = require("fs-extra");
-const conf = require("../set");
-//const { default: axios } = require('axios');
+const { timoth } = require("../timnasa/timoth");
+const { downloadMediaMessage, downloadContentFromMessage } = require("@whiskeysockets/baileys");
+const { exec } = require('child_process');
+const { writeFile } = require("fs/promises");
+const fs = require('fs-extra');
+const moment = require("moment-timezone");
 
 
 timoth({ nomCom: "tagadmin", categorie: 'Group', reaction: "🪰" }, async (dest, zk, commandeOptions) => {
