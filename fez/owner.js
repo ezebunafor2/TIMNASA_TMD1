@@ -1,4 +1,11 @@
-const { timoth } = require("../timnasa/timoth"); const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../database/sudo") const conf = require("../set");
+const { timoth } = require("../timnasa/timoth");
+const { downloadMediaMessage, downloadContentFromMessage } = require("@whiskeysockets/baileys");
+const { exec } = require('child_process');
+const { writeFile } = require("fs/promises");
+const fs = require('fs-extra');
+const moment = require("moment-timezone");
+
+
 
 timoth({ nomCom: "owner", categorie: "Devs", reaction: "🚜" }, async (dest, zk, commandeOptions) => { const { ms , mybotpic } = commandeOptions;
 
