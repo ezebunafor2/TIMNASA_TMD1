@@ -1,13 +1,9 @@
-const { timoth } = require("../timnasa/timoth");
-const { downloadMediaMessage, downloadContentFromMessage } = require("@whiskeysockets/baileys");
-const { exec } = require('child_process');
-const { writeFile } = require("fs/promises");
-const fs = require('fs-extra');
-const moment = require("moment-timezone");
+const { zokou } = require('../framework/zokou');
+const {ajouterUtilisateurAvecWarnCount , getWarnCountByJID , resetWarnCountByJID} = require('../bdd/warn')
+const s = require("../set")
 
 
-
-timoth(
+zokou(
     {
         nomCom : 'warn',
         categorie : 'Groupe'
@@ -41,4 +37,3 @@ if(verifAdmin || superUser) {
 }
  
    });
-
