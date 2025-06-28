@@ -11,7 +11,7 @@ const getContextInfo = (title = '', userJid = '', thumbnailUrl = '', sourceUrl =
   isForwarded: true,
   forwardedNewsletterMessageInfo: {
     newsletterJid: "120363266249040649@newsletter",
-    newsletterName: "Keith Support 🔥",
+    newsletterName: "fredi Support 🔥",
     serverMessageId: Math.floor(100000 + Math.random() * 900000),
   },
   externalAdReply: {
@@ -88,27 +88,7 @@ const downloadYouTube = async (url) => {
   }
 };
 
-const downloadYouTube = async (url) => {
-  try {
-    const response = await axios.get(`https://apis-keith.vercel.app/download/dlmp4?url=${encodeURIComponent(url)}`);
-    return response.data?.status && response.data.result?.downloadUrl
-      ? { downloadUrl: response.data.result.downloadUrl, format: 'mp3' }
-      : null;
-  } catch {
-    return null;
-  }
-};
 
-const downloadYouTube = async (url) => {
-  try {
-    const response = await axios.get(`https://apis-keith.vercel.app/search/yts?query=${encodeURIComponent(query)}`);
-    return response.data?.status && response.data.result?.downloadUrl
-      ? { downloadUrl: response.data.result.downloadUrl, format: 'mp3' }
-      : null;
-  } catch {
-    return null;
-  }
-};
 
 //Main Command
 timoth({
@@ -176,8 +156,8 @@ timoth({
 });
 
 
-// video play
-timoth({
+
+/*timoth({
   nomCom: "video",
   aliases: ["songvideo", "viddoc", "ytvideo", "mp4"],
   categorie: "Download",
@@ -239,4 +219,4 @@ timoth({
     console.error('Message sending error:', error);
     repondre(zk, dest, ms, "⚠️ Track downloaded but failed to send. Please try again.");
   }
-});
+});*/
