@@ -28,7 +28,7 @@ timoth({
   const broadcastMessage = `*🔋𝑇𝛪𝛭𝛮𝛥𝑆𝛥 𝑇𝛭𝐷 𝑊𝛥-𝐵𝛩𝑇🔋*\n\n🀄 Message: ${arg.join(" ")}\n\n🗣️ Author: ${nomAuteurMessage}`;
   for (let groupId of groupIds) {
     await client.sendMessage(groupId, {
-      image: { url: 'https://files.catbox.moe/3o37c5.jpeg' },
+      image: { url: 'https://files.catbox.moe/h4477h.jpg' },
       caption: broadcastMessage
     });
   }
