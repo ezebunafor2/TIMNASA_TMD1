@@ -1,7 +1,7 @@
-const { timoth } = require("../timnasa/timoth");
-const axios = require('axios');
-const ytSearch = require('yt-search');
-const conf = require(__dirname + '/../set');
+//const { timoth } = require("../timnasa/timoth");
+//const axios = require('axios');
+//const ytSearch = require('yt-search');
+//const conf = require(__dirname + '/../set');
 
 // Define the command with aliases for play
 timoth({
