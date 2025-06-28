@@ -1,9 +1,7 @@
-const {
-  timoth
-} = require('../timnasa/timoth');
-const axios = require("axios");
+const { timoth } = require("../timnasa/timoth");
+const axios = require('axios');
 const ytSearch = require('yt-search');
-const conf = require(__dirname + "/../set");
+const conf = require(__dirname + '/../set');
 
 
 timoth(
