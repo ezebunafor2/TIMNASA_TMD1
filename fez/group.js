@@ -1,11 +1,97 @@
-const { timoth } = require("../timnasa/timoth");
-const { downloadMediaMessage, downloadContentFromMessage } = require("@whiskeysockets/baileys");
-const { exec } = require('child_process');
-const { writeFile } = require("fs/promises");
-const fs = require('fs-extra');
-const moment = require("moment-timezone");
 
-timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📯" }, async (dest, zk, commandeOptions) => {
+
+const { timoth } = require("../timnasa/timoth")
+//const { getGroupe } = require("../luckydatabase/groupe")
+const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../data/antilien")
+const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../data/antibot")
+const { search, download } = require("aptoide-scraper");
+const fs = require("fs-extra");
+const conf = require("../set");
+const { default: axios } = require('axios');
+const {ajouterUtilisateurAvecWarnCount , getWarnCountByJID , resetWarnCountByJID} = require('../data/warn')
+const s = require("../set")
+//const { uploadImageToImgur } = require('../fredi/imgur');
+
+
+
+// COMMAND TO WARN USERS GROUP 
+timoth(
+    {
+        nomCom : 'warn',
+        categorie : 'Fredi-Group'
+        
+    },async (dest,zk,commandeOptions) => {
+
+ const {ms , arg, repondre,superUser,verifGroupe,verifAdmin , msgRepondu , auteurMsgRepondu} = commandeOptions;
+if(!verifGroupe ) {repondre('this is a group commands') ; return};
+
+if(verifAdmin || superUser) {
+   if(!msgRepondu){repondre('reply a message of user to warn'); return};
+   
+   if (!arg || !arg[0] || arg.join('') === '') {
+    await ajouterUtilisateurAvecWarnCount(auteurMsgRepondu)
+   let warn = await getWarnCountByJID(auteurMsgRepondu)
+   let warnlimit = s.WARN_COUNT
+   
+   if( warn >= warnlimit ) { await repondre('this user reach limit of warning , so i kick him/her');
+                zk.groupParticipantsUpdate(dest, [auteurMsgRepondu], "remove")
+ } else { 
+
+    var rest = warnlimit - warn ;
+     repondre(`this user is warn , rest before kick : ${rest} `)
+   }
+} else if ( arg[0] === 'reset') { await resetWarnCountByJID(auteurMsgRepondu) 
+
+    repondre("Warn count is reset for this user")} else ( repondre('reply to a user by typing  .warn ou .warn reset'))
+   
+}  else {
+    repondre('you are not admin')
+}
+ 
+   });
+   
+   
+ // COMMAND TO GETALLMEMBERS 
+timoth({ nomCom: "getallmembers", categorie: 'Fredi-Group', reaction: "📣" }, async (dest, zk, commandeOptions) => {
+  const { ms, repondre, arg, verifGroupe, nomGroupe, infosGroupe, nomAuteurMessage, verifAdmin, superUser } = commandeOptions;
+
+  if (!verifGroupe) return repondre("✋🏿 This command is reserved for groups ❌");
+
+  let mess = Array.isArray(arg) && arg.length ? arg.join(' ') : 'No message provided';
+  let membresGroupe = verifGroupe && infosGroupe ? infosGroupe.participants || [] : [];
+
+  let tag = `☢️LUCKY-MD-XFORCE☢️\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n  
+        🌟 *GROUP MEMBERS GIDS* 🌟
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n
+> regards timnasatimoth®\n\n`;
+
+  const emoji = ['💡', '☢️', '🗡️', '🖌️', '🪫', '🔋', '⚙️', '🕶️', '🌡️', '✏️', '📌', '©️', '$','®️','™️','⚔️','🔏'];
+  const randomEmoji = emoji[Math.floor(Math.random() * emoji.length)];
+
+  let mentions = [];
+  membresGroupe.forEach((membre, index) => {
+    let userJid = `${membre.id}`; // Ensure the full JID format
+    tag += `${index + 1}. ${randomEmoji} ${userJid}\n`;
+    mentions.push(userJid);
+  });
+
+  if (verifAdmin || superUser) {
+    console.log("Sending message to:", dest);
+    console.log("Message:", tag);
+    console.log("Mentions:", mentions);
+
+    zk.sendMessage(dest, { text: tag, mentions }, { quoted: ms })
+      .then(() => console.log("Message sent successfully"))
+      .catch(err => console.error("Error sending message:", err));
+  } else {
+    repondre("❌ Command reserved for admins.");
+  }
+});
+
+
+// COMMAND TO TAGALL
+timoth({ nomCom: "tagall", categorie: 'Fredi-Group', reaction: "📯" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, arg, verifGroupe, nomGroupe, infosGroupe, nomAuteurMessage, verifAdmin, superUser } = commandeOptions
 
@@ -20,13 +106,13 @@ timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📯" }, async (dest, 
   } ;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   var tag = ""; 
-  tag += `========================\n  
-        🌟 *TIMNASA-TMD TAGALL* 🌟
-========================\n
+  tag += `┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n  
+        🌟 *LUCKY-MD-XFORCE TAGS* 🌟
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n
 👥 Group : ${nomGroupe} 🚀 
 👤 Autor : *${nomAuteurMessage}* 👋 
 📜 Message : *${mess}* 📝
-========================\n
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n
 \n
 
 ` ;
@@ -34,7 +120,7 @@ timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📯" }, async (dest, 
 
 
 
-  let emoji = ['😇', '👀', '😮‍💨', '👋', '✌️', '😇', '⚙️', '💪', '🎊', '✨', '🙏🏿', '⛔️', '$','😎','🤔','⚡','🚜']
+  let emoji = ['💡', '☢️', '🗡️', '🖌️', '🪫', '🔋', '⚙️', '🕶️', '🌡️', '✏️', '📌', '©️', '$','®️','™️','⚔️','🔏']
   let random = Math.floor(Math.random() * (emoji.length - 1))
 
 
@@ -52,7 +138,8 @@ timoth({ nomCom: "tagall", categorie: 'Group', reaction: "📯" }, async (dest, 
 });
 
 
-timoth({ nomCom: "link", categorie: 'Group', reaction: "🚜" }, async (dest, zk, commandeOptions) => {
+// COMMAND TO LINK GROUP 
+timoth({ nomCom: "link", categorie: 'Fredi-Group', reaction: "🚜" }, async (dest, zk, commandeOptions) => {
   const { repondre, nomGroupe, nomAuteurMessage, verifGroupe } = commandeOptions;
   if (!verifGroupe) { repondre("wait bro , you want the link to my dm?"); return; };
 
@@ -62,13 +149,16 @@ timoth({ nomCom: "link", categorie: 'Group', reaction: "🚜" }, async (dest, zk
 
   let mess = `hello ${nomAuteurMessage} , here is the group link for ${nomGroupe} \n
 
-Grp link :${lien} \n\n★𝙿𝚘𝚠𝚎𝚛𝚎𝚍 𝚋𝚢  𝚃𝙸𝙼𝙽𝙰𝚂𝙰 𝚃𝙴𝙲𝙷`
+Grp link :${lien} \n\n★𝙿𝚘𝚠𝚎𝚛𝚎𝚍 𝚋𝚢  ☢️LUCKY-MD-XFORCE☢️`
   repondre(mess)
 
 
 });
+
+
+// COMMAND TO PROMOTE ADM
 /** *nommer un membre comme admin */
-timoth({ nomCom: "promote", categorie: 'Group', reaction: "💐" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "promote", categorie: 'Fredi-Group', reaction: "💐" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("For groups only"); }
@@ -127,10 +217,8 @@ timoth({ nomCom: "promote", categorie: 'Group', reaction: "💐" }, async (dest,
 
 })
 
-//fin nommer
-/** ***demettre */
-
-timoth({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+// COMMAND TO DEMOTE ADM
+timoth({ nomCom: "demote", categorie: 'Fredi-Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("For groups only"); }
@@ -166,7 +254,7 @@ timoth({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
   let autAdmin = verifGroupe ? a.includes(auteurMessage) : false;
   zkad = verifGroupe ? a.includes(idBot) : false;
   try {
-    // repondre(veriftimothAdmin)
+    // repondre(verifezraAdmin)
 
     if (autAdmin || superUser) {
       if (msgRepondu) {
@@ -193,10 +281,8 @@ timoth({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
 })
 
 
-
-/** ***fin démettre****  **/
-/** **retirer** */
-timoth({ nomCom: "remove", categorie: 'Group', reaction: "😱" }, async (dest, zk, commandeOptions) => {
+// COMMAND TO REMOVE MEMBERS 
+timoth({ nomCom: "remove", categorie: 'Fredi-Group', reaction: "😱" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("for groups only"); }
@@ -232,7 +318,7 @@ timoth({ nomCom: "remove", categorie: 'Group', reaction: "😱" }, async (dest, 
   let autAdmin = verifGroupe ? a.includes(auteurMessage) : false;
   zkad = verifGroupe ? a.includes(idBot) : false;
   try {
-    // repondre(veriftimothAdmin)
+    // repondre(verifezraAdmin)
 
     if (autAdmin || superUser) {
       if (msgRepondu) {
@@ -241,7 +327,7 @@ timoth({ nomCom: "remove", categorie: 'Group', reaction: "😱" }, async (dest, 
             if (admin == false) {
               const gifLink = "https://raw.githubusercontent.com/mr-X-force/LUCKY-MD-XFORCE/main/media/remover.gif"
               var sticker = new Sticker(gifLink, {
-                pack: 'TMNASA-TMD', // The pack name
+                pack: 'LUCKY-MD-XFORCE', // The pack name
                 author: nomAuteurMessage, // The author name
                 type: StickerTypes.FULL, // The sticker type
                 categories: ['🤩', '🎉'], // The sticker category
@@ -268,11 +354,8 @@ timoth({ nomCom: "remove", categorie: 'Group', reaction: "😱" }, async (dest, 
 
 })
 
-
-/** *****fin retirer */
-
-
-timoth({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, commandeOptions) => {
+// COMMAND TO DELETE 
+timoth({ nomCom: "del", categorie: 'Fredi-Group',reaction:"🧹" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe,auteurMsgRepondu,idBot, msgRepondu, verifAdmin, superUser} = commandeOptions;
   
@@ -320,7 +403,8 @@ timoth({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, c
 
 });
 
-timoth({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+// COMMAND TO GRUP INFO
+timoth({ nomCom: "info", categorie: 'Fredi-Group' }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, verifGroupe } = commandeOptions;
   if (!verifGroupe) { repondre("order reserved for the group only"); return };
 
@@ -333,7 +417,7 @@ timoth({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions)
 
     let mess = {
       image: { url: ppgroup },
-      caption:  `*━━━━『𝙶𝚁𝙾𝚄𝙿 𝙸𝙽𝙵𝙾』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
+      caption:  `☢️LUCKY-MD-XFORCE☢️\n\n*━━━━『𝙶𝚁𝙾𝚄𝙿 𝙸𝙽𝙵𝙾』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
     }
 
 
@@ -342,9 +426,8 @@ timoth({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions)
 
 
 
- //------------------------------------antilien-------------------------------
-
- timoth({ nomCom: "antilink", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
+ // COMMAND TO ACTVATE ANTILINK GROUP
+ timoth({ nomCom: "antilink", categorie: 'Fredi-Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
   var { repondre, arg, verifGroupe, superUser, verifAdmin } = commandeOptions;
@@ -410,9 +493,9 @@ timoth({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions)
 
 
 
- //------------------------------------antibot-------------------------------
+ // COMMAND TO ACTIVATE ANTIBOT
 
- timoth({ nomCom: "antibot", categorie: 'Group', reaction: "👾" }, async (dest, zk, commandeOptions) => {
+ timoth({ nomCom: "antibot", categorie: 'Fredi-Group', reaction: "👾" }, async (dest, zk, commandeOptions) => {
 
 
   var { repondre, arg, verifGroupe, superUser, verifAdmin } = commandeOptions;
@@ -476,9 +559,9 @@ timoth({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions)
 
 });
 
-//----------------------------------------------------------------------------
+// COMMAND TO GROUP ACTION OPN/CLS
 
-timoth({ nomCom: "group", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "group", categorie: 'Fredi-Group' }, async (dest, zk, commandeOptions) => {
 
   const { repondre, verifGroupe, verifAdmin, superUser, arg } = commandeOptions;
 
@@ -508,7 +591,8 @@ timoth({ nomCom: "group", categorie: 'Group' }, async (dest, zk, commandeOptions
 
 });
 
-timoth({ nomCom: "left", categorie: "Mods" }, async (dest, zk, commandeOptions) => {
+// COMMAND ACTION TO LEFT GROUP
+timoth({ nomCom: "left", categorie: "Fredi-User" }, async (dest, zk, commandeOptions) => {
 
   const { repondre, verifGroupe, superUser } = commandeOptions;
   if (!verifGroupe) { repondre("order reserved for group only"); return };
@@ -521,7 +605,8 @@ timoth({ nomCom: "left", categorie: "Mods" }, async (dest, zk, commandeOptions) 
   zk.groupLeave(dest)
 });
 
-timoth({ nomCom: "gname", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+// COMMAND TO EDIT GROUP NAME
+timoth({ nomCom: "gname", categorie: 'Fredi-Group' }, async (dest, zk, commandeOptions) => {
 
   const { arg, repondre, verifAdmin } = commandeOptions;
 
@@ -540,7 +625,8 @@ timoth({ nomCom: "gname", categorie: 'Group' }, async (dest, zk, commandeOptions
  
 }) ;
 
-timoth({ nomCom: "gdesc", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+// COMMAND TO EDIT GROUP DESK
+timoth({ nomCom: "gdesc", categorie: 'Fredi-Group' }, async (dest, zk, commandeOptions) => {
 
   const { arg, repondre, verifAdmin } = commandeOptions;
 
@@ -559,8 +645,8 @@ timoth({ nomCom: "gdesc", categorie: 'Group' }, async (dest, zk, commandeOptions
  
 }) ;
 
-
-timoth({ nomCom: "gpp", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+// COMMAND TO GET GROUP PROFILE PHOTO
+timoth({ nomCom: "gpp", categorie: 'Fredi-Group' }, async (dest, zk, commandeOptions) => {
 
   const { repondre, msgRepondu, verifAdmin } = commandeOptions;
 
@@ -584,8 +670,8 @@ timoth({ nomCom: "gpp", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
 });
 
-/////////////
-timoth({nomCom:"tag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+// COMMAND TO TAG ALL MEMBERS
+timoth({nomCom:"tag",categorie:'Fredi-Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
 
   const {repondre,msgRepondu,verifGroupe,arg ,verifAdmin , superUser}=commandeOptions;
 
@@ -650,7 +736,7 @@ timoth({nomCom:"tag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOp
         let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.stickerMessage)
 
         let stickerMess = new Sticker(media, {
-          pack: 'LUCKY-MD',
+          pack: 'LUCKY-MD-XFORCE',
           type: StickerTypes.CROPPED,
           categories: ["🤩", "🎉"],
           id: "12345",
@@ -691,8 +777,9 @@ timoth({nomCom:"tag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOp
 
 });
 
-/////////////
-timoth({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+
+// COMMAND TO TAG ALL MEMBERS
+timoth({nomCom:"hidetag",categorie:'Fredi-Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
 
   const {repondre,msgRepondu,verifGroupe,arg ,verifAdmin , superUser}=commandeOptions;
 
@@ -757,7 +844,7 @@ timoth({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,comman
         let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.stickerMessage)
 
         let stickerMess = new Sticker(media, {
-          pack: 'LUCKY-MD',
+          pack: 'LUCKY-MD-XFORCE',
           type: StickerTypes.CROPPED,
           categories: ["🤩", "🎉"],
           id: "12345",
@@ -798,8 +885,9 @@ timoth({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,comman
 
 });
 
-/////////////
-timoth({nomCom:"htag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+
+// COMMAND TO TAG ALL MEMBERS
+timoth({nomCom:"htag",categorie:'Fredi-Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
 
   const {repondre,msgRepondu,verifGroupe,arg ,verifAdmin , superUser}=commandeOptions;
 
@@ -864,7 +952,7 @@ timoth({nomCom:"htag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeO
         let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.stickerMessage)
 
         let stickerMess = new Sticker(media, {
-          pack: 'TIMNASA-TMD',
+          pack: 'LUCKY-MD-XFORCE',
           type: StickerTypes.CROPPED,
           categories: ["🤩", "🎉"],
           id: "12345",
@@ -904,70 +992,6 @@ timoth({nomCom:"htag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeO
 }
 
 });
-
-
-timoth({ nomCom: "app", reaction: "🚜", categorie: "Search" }, async (dest, zk, commandeOptions) => {
-  const { repondre, arg, ms } = commandeOptions;
-
-  try {
-    const appName = arg.join(' ');
-    if (!appName) {
-      return repondre("*Enter the name of the application to search for*");
-    }
-
-    const searchResults = await search(appName);
-
-    if (searchResults.length === 0) {
-      return repondre("*can't find application, please enter another name*");
-    }
-
-    const appData = await download(searchResults[0].id);
-    const fileSize = parseInt(appData.size);
-
-    if (fileSize > 300) {
-      return repondre("The file exceeds 300 MB, unable to download.");
-    }
-
-    const downloadLink = appData.dllink;
-    const captionText =
-      "『 *TIMNASA-TMD Application* 』\n\n*Name :* " + appData.name +
-      "\n*Id :* " + appData["package"] +
-      "\n*Last Update :* " + appData.lastup +
-      "\n*Size :* " + appData.size +
-      "\n";
-
-    const apkFileName = (appData?.["name"] || "Downloader") + ".apk";
-    const filePath = apkFileName;
-
-    const response = await axios.get(downloadLink, { 'responseType': "stream" });
-    const fileWriter = fs.createWriteStream(filePath);
-    response.data.pipe(fileWriter);
-
-    await new Promise((resolve, reject) => {
-      fileWriter.on('finish', resolve);
-      fileWriter.on("error", reject);
-    });
-
-    const documentMessage = {
-      'document': fs.readFileSync(filePath),
-      'mimetype': 'application/vnd.android.package-archive',
-      'fileName': apkFileName
-    };
-
-    // Utilisation d'une seule méthode sendMessage pour envoyer l'image et le document
-    zk.sendMessage(dest, { image: { url: appData.icon }, caption: captionText }, { quoted: ms });
-    zk.sendMessage(dest, documentMessage, { quoted: ms });
-
-    // Supprimer le fichier après envoi
-    fs.unlinkSync(filePath);
-  } catch (error) {
-    console.error('Erreur lors du traitement de la commande apk:', error);
-    repondre("*Error during apk command processing*");
-  }
-});
-
-
-
 
 
 /*******************************  automute && autoummute ***************************/
@@ -977,7 +1001,7 @@ const cron = require(`../data/cron`) ;
 
 timoth({
       nomCom : 'automute',
-      categorie : 'Group'
+      categorie : 'Fredi-Group'
   } , async (dest,zk,commandeOptions) => {
 
       const {arg , repondre , verifAdmin } = commandeOptions ;
@@ -1049,7 +1073,7 @@ timoth({
 
   timoth({
     nomCom : 'autounmute',
-    categorie : 'Group'
+    categorie : 'Fredi-Group'
 } , async (dest,zk,commandeOptions) => {
 
     const {arg , repondre , verifAdmin } = commandeOptions ;
@@ -1123,17 +1147,17 @@ timoth({
 });
 
 
-
+// COMMAND TO KICK
 timoth({
   nomCom : 'fkick',
-  categorie : 'Group'
+  categorie : 'Fredi-Group'
 } , async (dest,zk,commandeOptions) => {
 
-  const {arg , repondre , verifAdmin , superUser , veriftimothAdmin } = commandeOptions ;
+  const {arg , repondre , verifAdmin , superUser , verifezraAdmin } = commandeOptions ;
 
   if (verifAdmin || superUser) {
 
-    if(!veriftimothAdmin){ repondre('You need administrative rights to perform this command') ; return ;}
+    if(!verifezraAdmin){ repondre('You need administrative rights to perform this command') ; return ;}
 
     if (!arg || arg.length == 0) { repondre('Please enter the country code whose members will be removed') ; return ;}
 
@@ -1157,9 +1181,10 @@ timoth({
 }) ;
 
 
+// COMMAND TO NSFW
 timoth({
       nomCom : 'nsfw',
-      categorie : 'Group'
+      categorie : 'Fredi-Group'
 }, async (dest,zk,commandeOptions) => {
   
     const {arg , repondre , verifAdmin } = commandeOptions ;
