@@ -1,4 +1,4 @@
-const { ezra } = require("../fredi/ezra");
+const { timoth } = require("../timnasa/timoth");
 const baileys = require('@adiwajshing/baileys');
 
 async function getJidFromInviteLink(link, sock) {
@@ -20,7 +20,7 @@ async function getJidFromInviteLink(link, sock) {
   }
 }
 
-ezra({
+timoth({
   nomCom: "jid_user",
   categorie: "Mods"
 }, async (m, sock, info) => {
@@ -37,7 +37,7 @@ ezra({
   }, { quoted: ms });
 });
 
-ezra({
+timoth({
   nomCom: "jid_me",
   categorie: "Bot"
 }, async (m, sock, info) => {
@@ -54,7 +54,7 @@ ezra({
   }, { quoted: ms });
 });
 
-ezra({
+timoth({
   nomCom: "jid_group",
   categorie: "Group"
 }, async (m, sock, info) => {
@@ -78,7 +78,7 @@ ezra({
   }
 });
 
-ezra({
+timoth({
   nomCom: "jid_channel",
   categorie: "Channel"
 }, async (m, sock, info) => {
