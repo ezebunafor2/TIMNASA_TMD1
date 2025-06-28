@@ -1,8 +1,8 @@
-const { ezra } = require("../fredi/ezra");
+const { timoth } = require("../timoth/timoth");
 const axios = require('axios');
 const ytSearch = require('yt-search');
 const conf = require(__dirname + '/../set');
-const { repondre } = require(__dirname + "/../fredi/context");
+const { repondre } = require(__dirname + "/../timoth/context");
 
 // ContextInfo configuration
 const getContextInfo = (title = '', userJid = '', thumbnailUrl = '', sourceUrl = '') => ({
@@ -111,11 +111,11 @@ const downloadYouTube = async (url) => {
 };
 
 //Main Command
-ezra({
+timoth({
   nomCom: "play",
   aliases: ["song", "playdoc", "audio", "mp3"],
   categorie: "Fredi-Download",
-  reaction: "🎵"
+  reaction: "⚙️"
 }, async (dest, zk, commandOptions) => {
   const { arg, ms, userJid } = commandOptions;
 
@@ -177,10 +177,10 @@ ezra({
 
 
 // video play
-ezra({
+timoth({
   nomCom: "video",
   aliases: ["songvideo", "viddoc", "ytvideo", "mp4"],
-  categorie: "Fredi-Download",
+  categorie: "Download",
   reaction: "🎵"
 }, async (dest, zk, commandOptions) => {
   const { arg, ms, userJid } = commandOptions;
