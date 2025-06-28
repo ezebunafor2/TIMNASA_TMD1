@@ -1,8 +1,8 @@
-const { timoth } = require("../timoth/timoth");
+const { timoth } = require("../timnasa/timoth");
 const axios = require('axios');
 const ytSearch = require('yt-search');
 const conf = require(__dirname + '/../set');
-const { repondre } = require(__dirname + "/../timoth/context");
+const { repondre } = require(__dirname + "/../timnasa/context");
 
 // ContextInfo configuration
 const getContextInfo = (title = '', userJid = '', thumbnailUrl = '', sourceUrl = '') => ({
