@@ -10,8 +10,8 @@ const getContextInfo = (title = '', userJid = '', thumbnailUrl = '', sourceUrl =
   forwardingScore: 999,
   isForwarded: true,
   forwardedNewsletterMessageInfo: {
-    newsletterJid: "120363266249040649@newsletter",
-    newsletterName: "fredi Support 🔥",
+    newsletterJid: "120363332512801418@newsletter",
+    newsletterName: "𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
     serverMessageId: Math.floor(100000 + Math.random() * 900000),
   },
   externalAdReply: {
@@ -94,7 +94,7 @@ const downloadYouTube = async (url) => {
 timoth({
   nomCom: "play",
   aliases: ["song", "playdoc", "audio", "mp3"],
-  categorie: "Fredi-Download",
+  categorie: "download",
   reaction: "⚙️"
 }, async (dest, zk, commandOptions) => {
   const { arg, ms, userJid } = commandOptions;
