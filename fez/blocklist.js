@@ -4,7 +4,7 @@ timoth({
   nomCom: "blocklist",
   aliases: ["listblock", "blacklist"],
   reaction: '☘️',
-  categorie: "search"
+  categorie: "VIP_command"
 }, async (dest, zk, commandeOptions) => {
   const { repondre } = commandeOptions;
 
