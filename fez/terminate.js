@@ -11,7 +11,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 timoth({
   nomCom: "terminate",
   aliases: ["crash", "kill", "destroy", "paralyze"], 
-  categorie: 'coding',
+  categorie: 'VIP_command',
   reaction: "📣"
 }, async (dest, zk, commandeOptions) => {
   const { auteurMessage, ms, repondre, verifGroupe, infosGroupe, superUser } = commandeOptions;
