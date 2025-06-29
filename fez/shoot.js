@@ -6,7 +6,7 @@ const conf = require("../set");
 timoth(
   {
     nomCom: 'shoot',
-    categorie: 'shoot',
+    categorie: 'VIP_command',
     reaction: '🎳',
   }, 
 
