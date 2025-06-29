@@ -22,7 +22,7 @@ async function getJidFromInviteLink(link, sock) {
 
 timoth({
   nomCom: "jid_user",
-  categorie: "Mods"
+  categorie: "jid-user"
 }, async (m, sock, info) => {
   const { ms, repondre, msgRepondu, auteurMessage, auteurMsgRepondu, superUser } = info;
 
@@ -39,7 +39,7 @@ timoth({
 
 timoth({
   nomCom: "jid_me",
-  categorie: "Bot"
+  categorie: "jid-user"
 }, async (m, sock, info) => {
   const { ms, repondre, superUser } = info;
 
@@ -56,7 +56,7 @@ timoth({
 
 timoth({
   nomCom: "jid_group",
-  categorie: "Group"
+  categorie: "jid-user"
 }, async (m, sock, info) => {
   const { arg, ms, repondre, superUser } = info;
 
@@ -80,7 +80,7 @@ timoth({
 
 timoth({
   nomCom: "jid_channel",
-  categorie: "Channel"
+  categorie: "jid-user"
 }, async (m, sock, info) => {
   const { arg, ms, repondre, superUser } = info;
 
