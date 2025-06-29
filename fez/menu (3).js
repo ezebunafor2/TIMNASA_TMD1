@@ -100,7 +100,7 @@ timoth({
     const _0x59f59b = String.fromCharCode(0x200e);
     const _0x799099 = _0x59f59b.repeat(0xfa1);
     _0x72b381({
-      'nomCom': 'menu2',
+      'nomCom': 'menu',
       'categorie': 'Menu'
     }, async (_0x137bf9, _0x31af17, _0x4187e6) => {
       let {
