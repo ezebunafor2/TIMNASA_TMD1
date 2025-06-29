@@ -7,7 +7,7 @@ const conf = require(__dirname + "/../set");
 timoth({
   'nomCom': "img",
   'aliases': ["image", "images"],
-  'categorie': "search",
+  'categorie': "Download",
   'reaction': '☘️'
 }, async (_0x2ebed9, _0x1f4ff7, _0x5ebebb) => {
   const {
