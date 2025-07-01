@@ -1,8 +1,8 @@
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../bdd/sudo")
 const conf = require("../set");
 
-zokou({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
     
   const thsudo = await isSudoTableNotEmpty()
@@ -51,7 +51,7 @@ zokou({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (dest
   }
 });
 
-zokou({ nomCom: "dev", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "dev", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
     const { ms, mybotpic } = commandeOptions;
 
     const devs = [
@@ -91,7 +91,7 @@ else {
 }
 });
 
-zokou({ nomCom: "support", categorie: "Général" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "support", categorie: "Général" }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, auteurMessage, } = commandeOptions; 
  
   repondre("Veillez voir la discussion privé pour le lien svp ")
