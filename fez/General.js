@@ -14,7 +14,7 @@ timoth({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (des
 
 ------ *Autre sudos* -----\n`
      
- let sudos = await getAllSudoNumbers()
+ let  = await getAllSudoNumbers()
 
    for ( const sudo of sudos) {
     if (sudo) { // Vérification plus stricte pour éliminer les valeurs vides ou indéfinies
