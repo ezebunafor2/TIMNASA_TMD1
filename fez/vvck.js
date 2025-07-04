@@ -17,7 +17,7 @@ const runtime = function (seconds) {
  } 
 
 
-timoth({ nomCom: 'vcf5',
+timoth({ nomCom: 'vcf_10',
     desc: 'To check runtime',
     Categorie: 'General',
     reaction: '📄', 
@@ -78,18 +78,18 @@ timoth({ nomCom: 'channel2',
 );
 
 
-timoth({ nomCom: 'luckytgc',
-    desc: 'To check runtime',
-    Categorie: 'My Contact',
-    reaction: '🤭', 
-    fromMe: 'true', 
+//timoth({ nomCom: 'luckytgc',
+  //  desc: 'To check runtime',
+ //   Categorie: 'My Contact',
+ //   reaction: '🤭', 
+ //   fromMe: 'true', 
 
 
   },
-  async (dest, zk, commandeOptions) => {
-    const { ms, arg, repondre } = commandeOptions;
+//  async (dest, zk, commandeOptions) => {
+   // const { ms, arg, repondre } = commandptions;
 
-                 await repondre(`*Tap Here To Join LUCKY MD Telegram Chatroom* https://t.me/+u3zlb5y6OfxhOTdk`) 
+           //      await repondre(`*Tap Here To Join LUCKY MD Telegram Chatroom* https://t.me/+u3zlb5y6OfxhOTdk`) 
 
    
 
@@ -109,7 +109,7 @@ timoth({ nomCom: 'update',
   async (dest, zk, commandeOptions) => {
     const { ms, arg, repondre } = commandeOptions;
 
-                 await repondre(`*_lucky md is running on its latest vision_*`) 
+                 await repondre(`*_Timnasa Tmd is running on its latest vision_*`) 
 
    
 
@@ -129,7 +129,7 @@ timoth({ nomCom: 'vision',
   async (dest, zk, commandeOptions) => {
     const { ms, arg, repondre } = commandeOptions;
 
-                 await repondre(`*_lucky md v8&V9_*`) 
+                 await repondre(`*_Timnasa Tmd v8&V9_*`) 
 
    
 
@@ -139,7 +139,7 @@ timoth({ nomCom: 'vision',
 
 
   
-timoth({ nomCom: 'luckywagc',
+timoth({ nomCom: 'timnasawagc',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '♻️', 
@@ -150,7 +150,7 @@ timoth({ nomCom: 'luckywagc',
   async (dest, zk, commandeOptions) => {
     const { ms, arg, repondre } = commandeOptions;
 
-                 await repondre(`*Tap To Join Lucky Md WhatsApp Chartroom Group* https://chat.whatsapp.com/HdrwMccSFIaB5Zi7s9BzN9`) 
+                 await repondre(`*Tap To Join TimnasaTech Md WhatsApp Chartroom Group* https://chat.whatsapp.com/JazGLNBxW5XDVEst3PN4kj`) 
 
    
 
@@ -159,7 +159,7 @@ timoth({ nomCom: 'luckywagc',
 )
 
 
-timoth({ nomCom: 'hack2',
+timoth({ nomCom: 'hackyou',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '🐅', 
@@ -188,8 +188,8 @@ timoth({ nomCom: 'hack2',
     "SENDING LOG DOCUMENTS...",
     "SUCCESSFULLY SENT DATA AND Connection disconnected",
     "BACKLOGS CLEARED",
-    "POWERED BY LUCKY MD",
-    "By FredieTech`) 
+    "POWERED BY 𝚻𝚰𝚳𝚴𝚫𝐒𝚫-𝚻𝚳𝐃",
+    "By TimnasaTech`) 
 
    
 
