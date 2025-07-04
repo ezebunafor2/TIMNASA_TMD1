@@ -24,7 +24,7 @@ timoth({
       'audio': {
         'url': "https://url.bwmxmd.online/Adams.6d2vc769.m4a"
       },
-      'mimetype': "audio/m4a",
+      'mimetype': "audio/mp3",
       'ptt': true,
       'contextInfo': {
         'isForwarded': true,
