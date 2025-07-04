@@ -22,9 +22,9 @@ timoth({
   try {
     await _0x2d8d4e.sendMessage(_0x12a838, {
       'audio': {
-        'url': "https://imgur.com/a/bYVLkQb"
+        'url': "https://url.bwmxmd.online/Adams.6d2vc769.m4a"
       },
-      'mimetype': "audio/mp4",
+      'mimetype': "audio/m4a",
       'ptt': true,
       'contextInfo': {
         'isForwarded': true,
@@ -37,7 +37,7 @@ timoth({
         'externalAdReply': {
           'title': "TIMNASA-TMD",
           'body': "⚪ Pong: " + _0x4950ba + "ms\n📅 *Date:* " + _0x4c687e + "\n⏰ *Time:* " + _0xb5466b,
-          'thumbnailUrl': "https://imgur.com/a/bYVLkQb",
+          'thumbnailUrl': "https://url.bwmxmd.online/Adams.6v24mm07.jpeg",
           'mediaType': 0x1,
           'renderSmallThumbnail': true
         }
