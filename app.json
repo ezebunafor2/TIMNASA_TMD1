@@ -7,7 +7,7 @@
     "baileys",
     "whatsapp"
   ],
-  "logo": "https://imgur.com/a/bYVLkQb",
+  "logo": "https://url.bwmxmd.online/Adams.6v24mm07.jpeg",
   "repository": "https://github.com/Next5x/TIMNASA_TMD1",
   "succes_url": "/",
   "stack": "container",
@@ -111,7 +111,7 @@
     },
     "URL": {
       "description": "you must add your bot image url.Get your image url now and fill it here",
-      "value": "https://imgur.com/a/bYVLkQb",
+      "value": "https://url.bwmxmd.online/Adams.6v24mm07.jpeg",
       "required": true
     },
     "AUTO_READ_MESSAGES": {
