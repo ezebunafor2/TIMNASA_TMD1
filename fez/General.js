@@ -1,6 +1,7 @@
 const { timoth } = require("../timnasa/timoth");
-const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../bdd/sudo")
-const conf = require("../set");
+const moment = require("moment-timezone");
+const { getBuffer } = require("../timnasa/dl/Function");
+const { default: axios } = require('axios');
 
 timoth({ nomCom: "owner", categorie: "General", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
