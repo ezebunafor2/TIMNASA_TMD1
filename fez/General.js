@@ -2,19 +2,19 @@ const { timoth } = require("../timnasa/timoth");
 const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../bdd/sudo")
 const conf = require("../set");
 
-timoth({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "owner", categorie: "General", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
     
   const thsudo = await isSudoTableNotEmpty()
 
   if (thsudo) {
-     let msg = `*Zokou Super-User*\n
-     *Numero proprietaire\n* :
+     let msg = `*My Super-User*\n
+     *Owner Number\n* :
 - 🌟 @${conf.NUMERO_OWNER}
 
------- *Autre sudos* -----\n`
+------ *other sudos* -----\n`
      
- let  = await getAllSudoNumbers()
+ let sudos = await getAllSudoNumbers()
 
    for ( const sudo of sudos) {
     if (sudo) { // Vérification plus stricte pour éliminer les valeurs vides ou indéfinies
@@ -29,7 +29,7 @@ timoth({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (des
       zk.sendMessage(
         dest,
         {
-          image : { url : 'https://furansujapon.com/wp-content/uploads/2023/03/Saitama-dans-One-Punch-Man-1052x592.jpg'},
+          image : { url : mybotpic() },
           caption : msg,
           mentions : mentionedJid
         }
@@ -38,29 +38,29 @@ timoth({ nomCom: "owner", categorie: "Général", reaction: "💞" }, async (des
     const vcard =
         'BEGIN:VCARD\n' + // metadata of the contact card
         'VERSION:3.0\n' +
-        'FN:' + conf.NOM_OWNER + '\n' + // full name
+        'FN:' + conf.OWNER_NAME + '\n' + // full name
         'ORG:undefined;\n' + // the organization of the contact
         'TEL;type=CELL;type=VOICE;waid=' + conf.NUMERO_OWNER + ':+' + conf.NUMERO_OWNER + '\n' + // WhatsApp ID + phone number
         'END:VCARD';
     zk.sendMessage(dest, {
         contacts: {
-            displayName: conf.NOM_OWNER,
+            displayName: conf.OWNER_NAME,
             contacts: [{ vcard }],
         },
     },{quoted:ms});
   }
 });
 
-timoth({ nomCom: "dev", categorie: "Général", reaction: "💞" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "dev", categorie: "General", reaction: "🫶" }, async (dest, zk, commandeOptions) => {
     const { ms, mybotpic } = commandeOptions;
 
     const devs = [
-      { nom: "lezkush", numero: "+9687885 6800" },
-      { nom: "᚛M๏𝓷keℽ D Lบffy᚜", numero: "+9687885 6800" },
+      { nom: "fredie🍃tech", numero: "255752593977" },
+      { nom: "King Coder", numero: "255620814108" },
       // Ajoute d'autres développeurs ici avec leur nom et numéro
     ];
 
-    let message = "👋 Bienvenue chez Zokou ! Voici les développeurs :\n\n";
+    let message = "Hello👋 Friend Welcome🤝 To Lucky🍀 Md V5! here is the dev :\n\n";
     for (const dev of devs) {
       message += `----------------\n• ${dev.nom} : https://wa.me/${dev.numero}\n`;
     }
@@ -86,16 +86,56 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
 } 
 else {
     repondre(lien)
-    repondre("Le lien ne se termine ni par .mp4 ou .gif ni par .jpeg , jpg ou .png");
+    repondre("link error");
     
 }
 });
 
-timoth({ nomCom: "support", categorie: "Général" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "support", categorie: "General" }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, auteurMessage, } = commandeOptions; 
  
-  repondre("Veillez voir la discussion privé pour le lien svp ")
-  await zk.sendMessage(auteurMessage,{text : `https://whatsapp.com/channel/0029VajweHxKQuJP6qnjLM31`},{quoted :ms})
+  repondre("look on pm sir ")
+  await zk.sendMessage(auteurMessage,{text :`https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f`},{quoted :ms})
 
 })
 
+timoth({ nomCom: "developer", categorie: "General", reaction: "🦁" }, async (dest, zk, commandeOptions) => {
+    const { ms, mybotpic } = commandeOptions;
+
+    const devs = [
+      { nom: "fredie🍃tech", numero: "255686745716" },
+      { nom: "King Coder", numero: "255620814108" },
+      // Ajoute d'autres développeurs ici avec leur nom et numéro
+    ];
+
+    let message = "👋 *Welcome to lucky md v5* here is the developer numbers:\n\n";
+    for (const dev of devs) {
+      message += `----------------\n• ${dev.nom} : https://wa.me/${dev.numero}\n`;
+    }
+  var lien = mybotpic()
+    if (lien.match(/\.(mp4|gif)$/i)) {
+    try {
+        zk.sendMessage(dest, { video: { url: lien }, caption:message }, { quoted: ms });
+    }
+    catch (e) {
+        console.log("🥵🥵 Menu erreur " + e);
+        repondre("🥵🥵 Menu erreur " + e);
+    }
+} 
+// Vérification pour .jpeg ou .png
+else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
+    try {
+        zk.sendMessage(dest, { image: { url: lien }, caption:message }, { quoted: ms });
+    }
+    catch (e) {
+        console.log("🥵🥵 Menu erreur " + e);
+        repondre("🥵🥵 Menu erreur " + e);
+    }
+} 
+else {
+    repondre(lien)
+    repondre("link error");
+    
+}
+});
+    
