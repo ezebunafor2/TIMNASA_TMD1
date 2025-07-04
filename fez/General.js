@@ -3,7 +3,20 @@ const moment = require("moment-timezone");
 const { getBuffer } = require("../timnasa/dl/Function");
 const { default: axios } = require('axios');
 
-timoth({ nomCom: "owner", categorie: "General", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
+const runtime = function (seconds) { 
+ seconds = Number(seconds); 
+ var d = Math.floor(seconds / (3600 * 24)); 
+ var h = Math.floor((seconds % (3600 * 24)) / 3600); 
+ var m = Math.floor((seconds % 3600) / 60); 
+ var s = Math.floor(seconds % 60); 
+ var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " d, ") : ""; 
+ var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " h, ") : ""; 
+ var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " m, ") : ""; 
+ var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : ""; 
+ return dDisplay + hDisplay + mDisplay + sDisplay; 
+ } 
+
+timoth({ nomCom: "owner", categorie: "System", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
     
   const thsudo = await isSudoTableNotEmpty()
@@ -52,16 +65,16 @@ timoth({ nomCom: "owner", categorie: "General", reaction: "🇹🇿" }, async (d
   }
 });
 
-timoth({ nomCom: "dev", categorie: "General", reaction: "🫶" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "dev", categorie: "System", reaction: "🫶" }, async (dest, zk, commandeOptions) => {
     const { ms, mybotpic } = commandeOptions;
 
     const devs = [
-      { nom: "fredie🍃tech", numero: "255752593977" },
-      { nom: "King Coder", numero: "255620814108" },
+      { nom: "TimnasaTech", numero: "255784766591" },
+      { nom: "Next5x", numero: "255756469954" },
       // Ajoute d'autres développeurs ici avec leur nom et numéro
     ];
 
-    let message = "Hello👋 Friend Welcome🤝 To Lucky🍀 Md V5! here is the dev :\n\n";
+    let message = "Hello👋 Friend Welcome🤝 To TimnasaTech! here is the dev :\n\n";
     for (const dev of devs) {
       message += `----------------\n• ${dev.nom} : https://wa.me/${dev.numero}\n`;
     }
@@ -92,7 +105,7 @@ else {
 }
 });
 
-timoth({ nomCom: "support", categorie: "General" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "support", categorie: "System" }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, auteurMessage, } = commandeOptions; 
  
   repondre("look on pm sir ")
@@ -100,16 +113,16 @@ timoth({ nomCom: "support", categorie: "General" }, async (dest, zk, commandeOpt
 
 })
 
-timoth({ nomCom: "developer", categorie: "General", reaction: "🦁" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "developer", categorie: "System", reaction: "🦁" }, async (dest, zk, commandeOptions) => {
     const { ms, mybotpic } = commandeOptions;
 
     const devs = [
-      { nom: "fredie🍃tech", numero: "255686745716" },
-      { nom: "King Coder", numero: "255620814108" },
+      { nom: "TimnasaTech", numero: "255784766591" },
+      { nom: "Next5x", numero: "255756469954" },
       // Ajoute d'autres développeurs ici avec leur nom et numéro
     ];
 
-    let message = "👋 *Welcome to lucky md v5* here is the developer numbers:\n\n";
+    let message = "👋 *Welcome to lucky TimnasaTech* here is the developer numbers:\n\n";
     for (const dev of devs) {
       message += `----------------\n• ${dev.nom} : https://wa.me/${dev.numero}\n`;
     }
