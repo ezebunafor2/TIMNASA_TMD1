@@ -1,6 +1,6 @@
-const { zokou } = require("../framework/zokou");
+const { timoth } = require("../timnasa/timoth");
 const moment = require("moment-timezone");
-const { getBuffer } = require("../framework/dl/Function");
+const { getBuffer } = require("../timnasa/dl/Function");
 const { default: axios } = require('axios');
 
 const runtime = function (seconds) { 
@@ -17,7 +17,7 @@ const runtime = function (seconds) {
  } 
 
 
-zokou({ nomCom: 'vcf5',
+timoth({ nomCom: 'vcf5',
     desc: 'To check runtime',
     Categorie: 'General',
     reaction: '📄', 
@@ -37,7 +37,7 @@ zokou({ nomCom: 'vcf5',
 );
 
 
-zokou({ nomCom: 'getallmembers',
+timoth({ nomCom: 'sendall',
     desc: 'To check runtime',
     Categorie: 'General',
     reaction: '♻️', 
@@ -48,7 +48,7 @@ zokou({ nomCom: 'getallmembers',
   async (dest, zk, commandeOptions) => {
     const { ms, arg, repondre } = commandeOptions;
 
-                 await repondre(`*_getting all members_*`) 
+                 await repondre(`*_timnasa send all members_*`) 
 
    
 
@@ -58,7 +58,7 @@ zokou({ nomCom: 'getallmembers',
 
 
 
-zokou({ nomCom: 'channel',
+timoth({ nomCom: 'channel2',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '🐞', 
@@ -78,7 +78,7 @@ zokou({ nomCom: 'channel',
 );
 
 
-zokou({ nomCom: 'luckytgc',
+timoth({ nomCom: 'luckytgc',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '🤭', 
@@ -98,7 +98,7 @@ zokou({ nomCom: 'luckytgc',
 );
 
 
-zokou({ nomCom: 'update',
+timoth({ nomCom: 'update',
     desc: 'To check runtime',
     Categorie: 'General',
     reaction: '⚙️', 
@@ -118,7 +118,7 @@ zokou({ nomCom: 'update',
 );
 
 
-zokou({ nomCom: 'vision',
+timoth({ nomCom: 'vision',
     desc: 'To check runtime',
     Categorie: 'General',
     reaction: '🔎', 
@@ -139,7 +139,7 @@ zokou({ nomCom: 'vision',
 
 
   
-zokou({ nomCom: 'luckywagc',
+timoth({ nomCom: 'luckywagc',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '♻️', 
@@ -159,7 +159,7 @@ zokou({ nomCom: 'luckywagc',
 )
 
 
-zokou({ nomCom: 'hack2',
+timoth({ nomCom: 'hack2',
     desc: 'To check runtime',
     Categorie: 'My Contact',
     reaction: '🐅', 
