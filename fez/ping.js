@@ -22,7 +22,7 @@ timoth({
   try {
     await _0x2d8d4e.sendMessage(_0x12a838, {
       'audio': {
-        'url': "https://files.catbox.moe/x706d8.mp3"
+        'url': "https://imgur.com/a/bYVLkQb"
       },
       'mimetype': "audio/mp4",
       'ptt': true,
@@ -37,7 +37,7 @@ timoth({
         'externalAdReply': {
           'title': "TIMNASA-TMD",
           'body': "⚪ Pong: " + _0x4950ba + "ms\n📅 *Date:* " + _0x4c687e + "\n⏰ *Time:* " + _0xb5466b,
-          'thumbnailUrl': "https://files.catbox.moe/7n8oyx.jpg",
+          'thumbnailUrl': "https://imgur.com/a/bYVLkQb",
           'mediaType': 0x1,
           'renderSmallThumbnail': true
         }
