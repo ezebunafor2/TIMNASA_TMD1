@@ -1,3 +1,10 @@
+
+</p>
+<p align="center"><img src="https://profile-counter.glitch.me/{Next5x}/count.svg" alt="Timnasa_Tech :: Visitor's Count"/></p>
+
+        ```To open Timnasa TMd Repo Tap This Image There Is not Safe Use Original Repo To Get Update```
+[![Tap To Open Repo](https://i.imgur.com/1DHOg3Z.gif)](https://github.com/Next5x/TIMNASA_TMD1)
+
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 <p align="left">
 <a href="https://timnasa-session-id-9as4.onrender.com"><img src="https://img.shields.io/badge/Pair%20session%20code-white" alt="𝗽𝗮𝗶𝗿 𝘀𝗲𝘀𝘀𝗶𝗼𝗻 𝗶𝗱 𝟮" width="300"></a>
