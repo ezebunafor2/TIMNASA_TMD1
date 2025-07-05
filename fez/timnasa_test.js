@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { timoth } = require("../timnasa/timoth");
-timoth({ nomCom: "test", reaction: "📎", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "test2", reaction: "📎", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
     console.log("Commande saisie !!!s");
     let z = 'Hello my name is  *𝚃𝙸𝙼𝙽𝙰𝚂𝙰 𝚃𝙼𝙳* \n\n ' + "i'm a whatsapp bot multi-device created ";
     let d = ' by *𝚃𝙸𝙼𝙽𝙰𝚂𝙰 𝚃𝙴𝙲𝙷*';
