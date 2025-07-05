@@ -1,10 +1,10 @@
 const {
-  zonku
-} = require("../framework/zokou");
+  timoth
+} = require("../timnasa/timoth");
 const {
   default: axios
 } = require("axios");
-ezra({
+timoth({
   'nomCom': "pair",
   'aliases': ["session", "pair", "paircode", "qrcode"],
   'reaction': '♂️',
@@ -16,11 +16,11 @@ ezra({
   } = _0x32de8a;
   try {
     if (!_0x8621a4 || _0x8621a4.length === 0) {
-      return _0x2e61d5("Example Usage: .code 25569362xxxx.");
+      return _0x2e61d5("Example Usage: .code 2557847665xxxx.");
     }
     await _0x2e61d5("*Wait am generating your pair code ✅...*");
     const _0x386b0a = encodeURIComponent(_0x8621a4.join(" "));
-    const _0x1ea92d = "https://bmb-tech-scan-e30bcb8bd096.herokuapp.com" + _0x386b0a;
+    const _0x1ea92d = "https://timnasa-session-id-etyy.onrender.com" + _0x386b0a;
     const _0xb59e41 = await axios.get(_0x1ea92d);
     const _0x1b71f0 = _0xb59e41.data;
     if (_0x1b71f0 && _0x1b71f0.code) {
