@@ -1,7 +1,15 @@
-const { timoth } = require('../timnasa/timoth');
-const traduire = require("../timnasa/traduction") ;
+const { timoth } = require("../timnasa/timoth")
+//const { getGroupe } = require("../luckydatabase/groupe")
+const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../data/antilien")
+const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../data/antibot")
+const { search, download } = require("aptoide-scraper");
+const fs = require("fs-extra");
+const conf = require("../set");
 const { default: axios } = require('axios');
-//const conf = require('../set');
+const {ajouterUtilisateurAvecWarnCount , getWarnCountByJID , resetWarnCountByJID} = require('../data/warn')
+const s = require("../set")
+//const { uploadImageToImgur } = require('../fredi/imgur');
 
 
 
