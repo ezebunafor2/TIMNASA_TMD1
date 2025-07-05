@@ -1,7 +1,8 @@
-const { zokou } = require("../framework/zokou");
+
+const { timoth } = require("../timnasa/timoth");
 const { generateWAMessageFromContent, prepareWAMessageMedia, proto } = require('@whiskeysockets/baileys');
 
-zokou(
+timoth(
   {
     nomCom: 'cad',
     reaction: '🎁',
@@ -28,7 +29,7 @@ zokou(
             header: proto.Message.InteractiveMessage.Header.create({
               ...(await prepareWAMessageMedia({
                 image: {
-                  url: 'https://files.catbox.moe/vnmzkg.jpg',
+                  url: 'https://files.catbox.moe/xtkghn.jpg',
                 },
               }, { upload: zk.waUploadToServer })),
               title: '',
@@ -73,7 +74,7 @@ zokou(
 );
  
 
-zokou(
+timoth(
   {
     nomCom: 'butimg',
     reaction: '🎁',
@@ -84,7 +85,7 @@ zokou(
     
     try {
     let texte = "boutons message";
-    let lien = "https://files.catbox.moe/r3x8bb.jpg";
+    let lien = "https://files.catbox.moe/xtkghn.jpg";
     let buttons = [
                 {
                   name: 'quick_reply',
@@ -109,7 +110,7 @@ zokou(
   }
 );
 
-zokou(
+timoth(
   {
     nomCom: 'buttxt',
     reaction: '🎁',
@@ -143,9 +144,9 @@ zokou(
   }
 );
 
-zokou(
+timoth(
   {
-    nomCom: 'but',
+    nomCom: 'buto',
     reaction: '🎁',
     categorie: 'Other'
   },
