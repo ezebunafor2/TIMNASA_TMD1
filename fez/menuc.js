@@ -14,7 +14,7 @@ const s = require(__dirname + "/../set");
 
 
 
-timoth({ nomCom: "debora", categorie: "Menu" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "menu2", categorie: "Menu" }, async (dest, zk, commandeOptions) => {
 
     let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
 
@@ -67,7 +67,7 @@ const date = moment().format('DD/MM/YYYY');
   let infoMsg =  `
 
 ╭──━━━━══════━━━━❂
-┃ ━━⦿ *𝕃𝕌ℂ𝕂𝕐 𝕄𝔻* ⦿━━
+┃ ━━⦿ *ᴛɪᴍɴᴀsᴀ ᴛᴍᴅ* ⦿━━
 ┃ ✯𝕄𝕠𝕕𝕖: ${mode}
 ┃ ✯𝕌𝕤𝕖𝕣 : ${s.OWNER_NAME}
 ┃ ✯𝕃𝕚𝕓𝕣𝕒𝕣𝕪 : Baileys
@@ -85,7 +85,7 @@ const date = moment().format('DD/MM/YYYY');
 
 let menuMsg = `
 ┏━━══════━━┓
-┃⦿ _*ˡᵘᶜᵏʸ ᵐᵈ ᶜᵐᵈˢ*_
+┃⦿ _*ᴛɪᴍɴᴀsᴀ ᴛᴍᴅ*_
 ┗━━══════━━┛\n
 
 
@@ -115,11 +115,11 @@ let menuMsg = `
 
 
  ╭──━━══════━━━━┓
- ┃⦿ _*𝕝𝕦𝕔𝕜𝕪 𝕞𝕕 𝟚𝟘𝟚𝟜*_
+ ┃⦿ _*ᴛɪᴍɴᴀsᴀ ᴛᴍᴅ 𝟚𝟘𝟚𝟜*_
  ┃⦿ _*𝕖𝕟𝕛𝕠𝕪 𝕝𝕚𝕗𝕖*_ 
  ╰──━━══════━━━┳┛
  ╭──━━══════━━━┻┓
- ┃⦿ _*𝕡𝕠𝕨𝕖𝕣𝕖𝕕 𝕓𝕪 𖣘ғʀᴇᴅɪᴇ ᴛᴇᴄʜ𖣘*_
+ ┃⦿ _*𝕡𝕠𝕨𝕖𝕣𝕖𝕕 𝕓𝕪 𖣘ᴛɪᴍɴᴀsᴀ ᴛᴍᴅ𖣘*_
  ╰──━━══════━━━━┛\n
 
 
