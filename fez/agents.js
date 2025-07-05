@@ -25,9 +25,9 @@ timoth({
     mybotpic: _0x43a6e2
   } = _0x2358bf;
   const _0x21b56d = [{
-    'nom': "Belta from Kenya",
-    'nom': "FrediTech from Tanzania 🇹🇿",
-    'numero': "load..."
+    'nom': "TimnasaTech agents",
+    'nom': "TimnasaTech from Tanzania 🇹🇿",
+    'numero': "255784766591"
   }, {
     'nom': "Belta from Kenya 🇰🇪",
     'numero': "254114141192"
@@ -59,8 +59,8 @@ timoth({
 'nom': "🤕",
     'numero': "Load...."
   }, {
-'nom': "Kingfreditech From Tanzania 🇹🇿",
-    'numero': "255620814108"
+'nom': "Kingtimnasa-tech From Tanzania 🇹🇿",
+    'numero': "255756469954"
   }, {
     'nom': "🤕",
     'numero': "load...."
