@@ -1,9 +1,15 @@
-const { timoth } = require("../timnasa/timnasa");
-const axios = require("axios");
-const yts = require('yt-search');
-const fs = require('fs');
-const yt = require("../timnasa/dl/ytdl-core.js");
-const ffmpeg = require("fluent-ffmpeg");
+const { timoth } = require("../timnasa/timoth")
+//const { getGroupe } = require("../luckydatabase/groupe")
+const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+const {ajouterOuMettreAJourJid,mettreAJourAction,verifierEtatJid} = require("../data/antilien")
+const {atbajouterOuMettreAJourJid,atbverifierEtatJid} = require("../data/antibot")
+const { search, download } = require("aptoide-scraper");
+const fs = require("fs-extra");
+const conf = require("../set");
+const { default: axios } = require('axios');
+const {ajouterUtilisateurAvecWarnCount , getWarnCountByJID , resetWarnCountByJID} = require('../data/warn')
+const s = require("../set")
+//const { uploadImageToImgur } = require('../fredi/imgur');
 
 timoth({
   nomCom: "mygroups",
