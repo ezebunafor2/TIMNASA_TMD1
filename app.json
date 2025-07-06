@@ -121,8 +121,8 @@
     },
     "NUMERO_OWNER": {
       "description": "Your phone number (exclude '+' and area code, e.g., '255752593977')",
-      "value": "255756469954",
-      "required": false
+      "value": "255784766591",
+      "required": true
     },
     "WARN_COUNT": {
       "description": "Set the warning limit for warning commands",
