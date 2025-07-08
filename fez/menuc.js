@@ -14,7 +14,7 @@ const s = require(__dirname + "/../set");
 
 
 
-timoth({ nomCom: "menu2", categorie: "Menu" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "menu", categorie: "Menu" }, async (dest, zk, commandeOptions) => {
 
     let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
 
