@@ -1,5 +1,5 @@
 //const { timoth } = require("../timnasa/timoth");
-const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+//const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 const { timoth } = require("../timnasa/timoth");
 const moment = require("moment-timezone");
 const { getBuffer } = require("../timnasa/dl/Function");
