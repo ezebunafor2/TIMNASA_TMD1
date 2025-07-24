@@ -3,9 +3,10 @@
   "description":"Best whatsapp bot💥 developed by   ᴛɪᴍɴᴀsᴀ ᴍᴜʟᴛɪᴘʟᴇ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ ",
   "keywords":["bot","node","baileys","whatsapp"],
   "logo":"https://files.catbox.moe/t1rw0x.jpg",
-  "repository":"https://github.com/ekitale/maths-project",
-  "succes_url":"/",
-  "stack":"heroku-24",
+    "repository": "https://github.com/mesh-matheka/Makamesco_md",
+  "succes_url": "/",
+  "stack": "container",
+
   "env":{
     "PREFIX":
     {
@@ -127,19 +128,30 @@
     "description": "if you want to enable anti delete message put yes else put no",
     "value": "no",
         "required": true
-  }
-  },
-	
- 
-	  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    },
-    {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    },
-    {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+   }
+
+ },
+
+  "formation": {
+
+    "worker": {
+
+      "quantity": 1,
+
+      "size": "standard-2x"
+
     }
+
+  },
+
+  "addons": [
+
+    {
+
+      "plan": "heroku-postgresql:essential-0"
+
+    }
+
   ]
+
 }
