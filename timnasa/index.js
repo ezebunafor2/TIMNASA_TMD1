@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.genererNomFichier = exports.stick = exports.format = exports.styletext = exports.zJson = exports.getBuffer = exports.reaction = exports.police = exports.keith = void 0;
-let { keith } = require("./timoth");
-exports.keith = keith;
+exports.genererNomFichier = exports.stick = exports.format = exports.styletext = exports.zJson = exports.getBuffer = exports.reaction = exports.police = exports.timoth = void 0;
+let { timoth } = require("./timoth");
+exports.timoth = timoth;
 const mesfonctions_1 = require("./mesfonctions");
 Object.defineProperty(exports, "reaction", { enumerable: true, get: function () { return mesfonctions_1.reaction; } });
 Object.defineProperty(exports, "police", { enumerable: true, get: function () { return mesfonctions_1.police; } });
