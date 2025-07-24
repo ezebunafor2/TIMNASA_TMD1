@@ -591,7 +591,7 @@ const capitalGame = [{
 const axios = require('axios');
 const fs = require('fs');
 const { writeFile } = require('fs/promises')
-zokou({
+timoth({
   nomCom: "currencylist",
   aliases: ["currencies", "conversionrates"],
   reaction: '💲',
