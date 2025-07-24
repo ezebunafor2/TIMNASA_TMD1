@@ -50,7 +50,7 @@ module.exports = { session: process.env.SESSION_ID || 'timoth',
      storage: DATABASE_URL,
      logging: false,
 })
-: new Sequelize(DATABASE_URL, {
+: new Sequelize(DATABASE_URL, 
      dialect: 'postgres',
      ssl: true,
      protocol: 'postgres',
@@ -68,4 +68,3 @@ fs.watchFile(fichier, () => {
     delete require.cache[fichier];
     require(fichier);
 });
-
