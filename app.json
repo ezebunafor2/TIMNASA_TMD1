@@ -25,6 +25,13 @@
       "value":"no",
       "required":false
     },
+
+   "AUTO_SAVE_CONTACTS":
+    {
+      "description":"Put yes this value if you want bot to save new contacts",
+      "value":"no",
+      "required":false
+    },
     "AUTO_READ":
     {
       "description":"Your contact  will be read messages automatically(type yes to active or no to deactive  ; don't write in capital letter)",
