@@ -31,13 +31,13 @@
       "value":"no",
       "required":false   
       },
-  "AUTO_REACT":
+  "AUTO_REACTION":
     {
       "description":"Enter yes for your bot to auto react",
       "value":"no",
       "required":false
     },
-"ANTICALL":
+"ANTI_CALL":
     {
       "description":"Enter yes for your bot to auto reject calls",
       "value":"no",
@@ -63,7 +63,7 @@
       "required":false
 
     } ,
-     "BOT_MENU_LINKS" : {
+     "URL" : {
     
       "description":"add one or many link for your bot menu  ; eg : url1,url2,url3.....",
       "value":"https://files.catbox.moe/t1rw0x.jpg",
