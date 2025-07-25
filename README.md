@@ -1,6 +1,6 @@
   <a href="https://timnasa-session-id-etyy.onrender.com"><img title="GET-SESSION ID HERE" src="https://img.shields.io/badge/GET-SESSION ID HERE-h?color=blue&style=for-the-badge&logo=nike" width="230" height="38.45"/></a></p>
 </p>
-<p align="center"><img src="https://profile-counter.glitch.me/{Next5x}/count.svg" alt="https://i.imgur.com/1DHOg3Z.gif" :Visitor's Count"/></p>
+
 
         ```To open Timnasa TMd Repo Tap This Image There Is not Safe Use Original Repo To Get Update```
 [![Tap To Open Repo](https://i.imgur.com/1DHOg3Z.gif)](https://github.com/Next5x/TIMNASA_TMD1)
