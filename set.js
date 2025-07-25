@@ -14,7 +14,7 @@ module.exports = { session: process.env.SESSION_ID || 'timoth',
     NUMERO_OWNER : process.env.NUMERO_OWNER || "255784766591", 
               
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "no",
-   AUTO_SAVE_CONTACTS: process.en.AUTO_SAVE_CONTACTS || "no",
+   AUTO_SAVE_CONTACTS : process.env.AUTO_SAVE_CONTACTS || 'no',
     AUTO_DOWNLOAD_STATUS: process.env.AUTO_DOWNLOAD_STATUS || 'no',
     AUTO_REACT: process.env.AUTO_REACTION || "no",  
     URL: process.env.URL || "https://files.catbox.moe/xtkghn.jpg",  
