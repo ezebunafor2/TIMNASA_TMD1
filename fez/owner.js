@@ -51,7 +51,7 @@ timoth({ nomCom: "ownerx", categorie: "General", reaction: "🚘" }, async (dest
   }
 });
 
-timoth({ nomCom: "dev", categorie: "General", reaction: "🚘" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "devx", categorie: "General", reaction: "🚘" }, async (dest, zk, commandeOptions) => {
     const { ms, mybotpic } = commandeOptions;
 
     const devs = [
@@ -92,7 +92,7 @@ else {
 }
 });
 
-timoth({ nomCom: "support", categorie: "General" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "supportx", categorie: "General" }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, auteurMessage, } = commandeOptions; 
  
   repondre("THANK YOU FOR CHOOSING TIMNASA-TMD, HERE ARE OUR SUPPORTIVE LINKS\n\n ☉ CHANNEL LINK IS HERE ☉ \n\n❒⁠⁠⁠⁠[https://whatsapp.com/channel/0029VajweHxKQuJP6qnjLM31] \n\n ☉ GROUP LINK IS HERE ☉\n\n❒⁠⁠⁠⁠[https://chat.whatsapp.com/BM7F8CC4yMO9iJynKkiflU] \n\n ☉YOUTUBE LINK IS HERE ☉\n\n❒⁠⁠⁠⁠[https://www.youtube.com/@ibrahimaitech] \n\n\n*Created By 𝐓𝐈𝐌𝐍𝐀𝐒𝐀.𝐃𝐄𝐓𝐄𝐒𝐓𝐄𝐃") 
