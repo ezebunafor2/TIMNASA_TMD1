@@ -16,7 +16,7 @@ const runtime = function (seconds) {
  return dDisplay + hDisplay + mDisplay + sDisplay; 
  } 
 
-timoth({ nomCom: "owner", categorie: "System", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
+timoth({ nomCom: "owner1", categorie: "System", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
     
   const thsudo = await isSudoTableNotEmpty()
