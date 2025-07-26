@@ -1,101 +1,72 @@
 const { timoth } = require("../timnasa/timoth");
-const {getAllSudoNumbers,isSudoTableNotEmpty} = require("../bdd/sudo")
-const conf = require("../set");
+const moment = require("moment-timezone");
+const { getBuffer } = require("../timnasa/dl/Function");
+const { default: axios } = require('axios');
 
-timoth({ nomCom: "ownerx", categorie: "General", reaction: "🚘" }, async (dest, zk, commandeOptions) => {
+const runtime = function (seconds) { 
+    seconds = Number(seconds); 
+    var d = Math.floor(seconds / (3600 * 24)); 
+    var h = Math.floor((seconds % (3600 * 24)) / 3600); 
+    var m = Math.floor((seconds % 3600) / 60); 
+    var s = Math.floor(seconds % 60); 
+    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " d, ") : ""; 
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " h, ") : ""; 
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " m, ") : ""; 
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : ""; 
+    return dDisplay + hDisplay + mDisplay + sDisplay; 
+} 
+
+timoth({ nomCom: "owner", categorie: "System", reaction: "🇹🇿" }, async (dest, zk, commandeOptions) => {
     const { ms , mybotpic } = commandeOptions;
-    
-  const thsudo = await isSudoTableNotEmpty()
 
-  if (thsudo) {
-     let msg = `*My Super-User*\n
-     *Owner Number*\n :
-- 🌟 @${conf.NUMERO_OWNER}
+    const thsudo = await isSudoTableNotEmpty()
 
------- *other sudos* -----\n`
-     
- let sudos = await getAllSudoNumbers()
+    if (thsudo) {
+        let msg = `*My Super-User*\n`
+        + `*Owner Number:\n*`
+        + `- 🌟 @${conf.NUMERO_OWNER}\n`
+        + `------ *other sudos* -----\n`;
 
-   for ( const sudo of sudos) {
-    if (sudo) { // Vérification plus stricte pour éliminer les valeurs vides ou indéfinies
-      sudonumero = sudo.replace(/[^0-9]/g, '');
-      msg += `- 💼 @${sudonumero}\n`;
-    } else {return}
+        let sudos = await getAllSudoNumbers();
 
-   }   const ownerjid = conf.NUMERO_OWNER.replace(/[^0-9]/g) + "@s.whatsapp.net";
-   const mentionedJid = sudos.concat([ownerjid])
-   console.log(sudos);
-   console.log(mentionedJid)
-      zk.sendMessage(
-        dest,
-        {
-          image : { url : mybotpic() },
-          caption : msg,
-          mentions : mentionedJid
+        for (const sudo of sudos) {
+            if (sudo) { // Strict check to skip falsy values
+                const sudonumero = sudo.replace(/[^0-9]/g, '');
+                msg += `- 💼 @${sudonumero}\n`;
+            } else {
+                console.log("Skipping invalid sudo:", sudo);
+                continue; // Skip invalid entries instead of returning
+            }
         }
-      )
-  } else {
-    const vcard =
-        'BEGIN:VCARD\n' + // metadata of the contact card
-        'VERSION:3.0\n' +
-        'FN:' + conf.OWNER_NAME + '\n' + // full name
-        'ORG:undefined;\n' + // the organization of the contact
-        'TEL;type=CELL;type=VOICE;waid=' + conf.NUMERO_OWNER + ':+' + conf.NUMERO_OWNER + '\n' + // WhatsApp ID + phone number
-        'END:VCARD';
-    zk.sendMessage(dest, {
-        contacts: {
-            displayName: conf.OWNER_NAME,
-            contacts: [{ vcard }],
-        },
-    },{quoted:ms});
-  }
+
+        const ownerjid = conf.NUMERO_OWNER.replace(/[^0-9]/g, '') + "@s.whatsapp.net";
+        const mentionedJid = sudos.map(sudo => sudo.replace(/[^0-9]/g, '') + "@s.whatsapp.net").concat([ownerjid]);
+
+        console.log(sudos);
+        console.log(mentionedJid);
+
+        zk.sendMessage(
+            dest,
+            {
+                image: { url: mybotpic() },
+                caption: msg,
+                mentions: mentionedJid
+            }
+        );
+    } else {
+        const vcard =
+            'BEGIN:VCARD\n' 
+            + 'VERSION:3.0\n' 
+            + 'FN:' + conf.OWNER_NAME + '\n' 
+            + 'ORG:undefined;\n' 
+            + 'TEL;type=CELL;type=VOICE;waid=' + conf.NUMERO_OWNER + ':+' + conf.NUMERO_OWNER + '\n' 
+            + 'END:VCARD';
+
+        zk.sendMessage(dest, {
+            contacts: {
+                displayName: conf.OWNER_NAME,
+                contacts: [{ vcard }],
+            },
+        }, { quoted: ms });
+    }
 });
-
-timoth({ nomCom: "devx", categorie: "General", reaction: "🚘" }, async (dest, zk, commandeOptions) => {
-    const { ms, mybotpic } = commandeOptions;
-
-    const devs = [
-      { nom: "Timnasa1", numero: "255784766591" },
-      { nom: "᚛timnasa2᚜", numero: "255756469954" },
-      { nom: "Linknumber", numero: "https://wa.me/message/JPGLOZDIQGRPD1" },
-      // Ajoute d'autres développeurs ici avec leur nom et numéro
-    ];
-
-    let message = "WELCOME TO TIMNASA-TMD HELP CENTER! ASK FOR HELP FROM ANY OF THE DEVELOPERS BELOW:\n\n";
-    for (const dev of devs) {
-      message += `----------------\n• ${dev.nom} : https://wa.me/${dev.numero}\n`;
-    }
-  var lien = mybotpic()
-    if (lien.match(/\.(mp4|gif)$/i)) {
-    try {
-        zk.sendMessage(dest, { video: { url: lien }, caption:message }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-// Vérification pour .jpeg ou .png
-else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-    try {
-        zk.sendMessage(dest, { image: { url: lien }, caption:message }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-else {
-    repondre(lien)
-    repondre("link error");
-    
-}
-});
-
-timoth({ nomCom: "supportx", categorie: "General" }, async (dest, zk, commandeOptions) => {
-  const { ms, repondre, auteurMessage, } = commandeOptions; 
- 
-  repondre("THANK YOU FOR CHOOSING TIMNASA-TMD, HERE ARE OUR SUPPORTIVE LINKS\n\n ☉ CHANNEL LINK IS HERE ☉ \n\n❒⁠⁠⁠⁠[https://whatsapp.com/channel/0029VajweHxKQuJP6qnjLM31] \n\n ☉ GROUP LINK IS HERE ☉\n\n❒⁠⁠⁠⁠[https://chat.whatsapp.com/BM7F8CC4yMO9iJynKkiflU] \n\n ☉YOUTUBE LINK IS HERE ☉\n\n❒⁠⁠⁠⁠[https://www.youtube.com/@ibrahimaitech] \n\n\n*Created By 𝐓𝐈𝐌𝐍𝐀𝐒𝐀.𝐃𝐄𝐓𝐄𝐒𝐓𝐄𝐃") 
-  await zk.sendMessage(auteurMessage,{text : `THANK YOU FOR CHOOSING WHATSAPP.BOT DETESTED TIMNASA,MAKE SURE YOU FOLLOW THESE LINKS. `},{quoted :ms})
-
-})
