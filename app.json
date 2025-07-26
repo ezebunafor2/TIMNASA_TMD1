@@ -76,7 +76,7 @@
     },
     "HEROKU_API_KEY": {
       "description": "Insert your Heroku API key (required)",
-      "value": "",
+      "value": "TIMNASA_TMD1",
       "required": true
     },
     "HEROKU_APP_NAME": {
@@ -91,7 +91,7 @@
     },
     "OWNER_NAME": {
       "description": "don't you have a name bro.Insert your name here!!",
-      "value": "FrediEzra",
+      "value": "TIMNASA_TMD1",
       "required": false
     },
     "AUTO_READ_MESSAGES": {
@@ -101,7 +101,7 @@
     },
     "NUMERO_OWNER": {
       "description": "Your phone number (exclude '+' and area code, e.g., '255752593977')",
-      "value": "",
+      "value": "255784766591",
       "required": false
     },
     "STARTING_BOT_MESSAGE": {
@@ -111,7 +111,7 @@
     },
     "PRESENCE": {
       "description": "Mark your presence: 1 for online, 2 for typing, 3 for recording, or leave blank for real state",
-      "value": "1",
+      "value"you2",
       "required": false
     },
     "ANTI_DELETE_MESSAGES": {
@@ -121,7 +121,7 @@
     },
     "ANTI_CALL": {
       "description": "Automatically decline incoming calls (set 'on' to activate or 'off' to deactivate)",
-      "value": "yes",
+      "value": "no",
       "required": false
     },
     "AUTO_BLOCK": {
