@@ -111,7 +111,7 @@
     },
     "PRESENCE": {
       "description": "Mark your presence: 1 for online, 2 for typing, 3 for recording, or leave blank for real state",
-      "value"2",
+      "value": "2",
       "required": false
     },
     "ANTI_DELETE_MESSAGES": {
