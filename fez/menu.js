@@ -57,8 +57,31 @@ const date = moment().format('DD/MM/YYYY');
    var lien = mybotpic();
    if (lien.match(/\.(mp4|gif)$/i)) {
     try {
-        zk.sendMessage(dest, { video: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *Luckymd*, déveloper Fredie Tech" , gifPlayback : true }, { quoted: ms });
-    }
+        zk.sendMessage(dest, { 
+         video: { url: lien },
+         caption:infoMsg + menuMsg,
+             contextInfo: {
+            isForwarded: true,
+             forwardedNewsletterMessageInfo: {
+             newsletterJid: '120363345407274799@newsletter',
+              newsletterName: "╭••➤ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
+              serverMessageId: 143,
+            },
+        },
+     }, { quoted: {
+            key: {
+                fromMe: false,
+                participant: `0@s.whatsapp.net`,
+                remoteJid: "status@broadcast"
+            },
+            message: {
+                contactMessage: {
+                    displayName: "✆︎ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1 verified",
+                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:TimnasaTech;BOT;;;\nFN:Timnasa_Tech\nitem1.TEL;waid=254700000000:+254 700 000000\nitem1.X-ABLabel:Bot\nEND:VCARD`
+                }
+            }
+        } });
+   }
     catch (e) {
        console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
@@ -67,14 +90,60 @@ const date = moment().format('DD/MM/YYYY');
 // Vérification pour .jpeg ou .png
 else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
     try {
-        zk.sendMessage(dest, { image: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *Luckymd*, déveloper Fredie Tech" }, { quoted: ms });
+        zk.sendMessage(dest, {
+        image: { url: lien }, 
+        caption:infoMsg + menuMsg, 
+         contextInfo: {
+            isForwarded: true,
+             forwardedNewsletterMessageInfo: {
+             newsletterJid: '120363345407274799@newsletter',
+              newsletterName: "╭••➤ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
+              serverMessageId: 143,
+            },
+          },
+     }, { quoted: ms });
     }
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
     }
-} 
-else {
-    repondre(infoMsg + menuMsg);
-}
+
+  // List of audio URLs
+    const audioUrls = [
+        "https://files.catbox.moe/6x0rb7.mp3" // New song added
+    ];
+
+    // Select a random audio file
+    const randomAudioUrl = audioUrls[Math.floor(Math.random() * audioUrls.length)];
+
+    try {
+        await zk.sendMessage(dest, {
+            audio: { url: randomAudioUrl },
+            mimetype: 'audio/mpeg',
+            ptt: true, // Send as a voice note
+          contextInfo: {
+            isForwarded: true,
+             forwardedNewsletterMessageInfo: {
+             newsletterJid: '120363345407274799@newsletter',
+              newsletterName: "╭••☯️ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
+              serverMessageId: 143,
+              },
+            },
+        }, { quoted: {
+            key: {
+                fromMe: false,
+                participant: `0@s.whatsapp.net`,
+                remoteJid: "status@broadcast"
+            },
+            message: {
+                contactMessage: {
+                    displayName: "✆︎ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1 verified",
+                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:TimnasaTech;BOT;;;\nFN:Timnasa_Tech\nitem1.TEL;waid=254700000000:+254 700 000000\nitem1.X-ABLabel:Bot\nEND:VCARD`
+                }
+            }
+        } });
+    } catch (e) {
+        console.log("🥵🥵 Error sending audio: " + e);
+        repondre("🥵🥵 Error sending audio: " + e);
+    }
 });
