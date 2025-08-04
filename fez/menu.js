@@ -110,7 +110,7 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
 
   // List of audio URLs
     const audioUrls = [
-        "https://files.catbox.moe/6x0rb7.mp3" // New song added
+        "https://files.catbox.moe/y9u7w8.mp3" // New song added
     ];
 
     // Select a random audio file
