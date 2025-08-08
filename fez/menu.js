@@ -1,149 +1,113 @@
-const util = require('util');
-const fs = require('fs-extra');
-const { timoth } = require(__dirname + "/../timnasa/timoth");
-const { format } = require(__dirname + "/../timnasa/mesfonctions");
-const os = require("os");
+"use strict";
+const { timoth } = require("../timnasa/timoth");
 const moment = require("moment-timezone");
-const s = require(__dirname + "/../set");
-const more = String.fromCharCode(8206)
-const readmore = more.repeat(4001)
-timoth({ nomCom: "menu", categorie: "Menu" }, async (dest, zk, commandeOptions) => {
-    let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
-    let { cm } = require(__dirname + "/../timnasa//timoth");
-    var coms = {};
-    var mode = "public";
+const os = require("os");
+const s = require("../set");
+
+const readMore = String.fromCharCode(8206).repeat(4001);
+
+// Function to convert text to fancy uppercase font
+const toFancyUppercaseFont = (text) => {
+    const fonts = {
+        'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌',
+        'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙'
+    };
+    return text.split('').map(char => fonts[char] || char).join('');
+};
+
+// Function to convert text to fancy lowercase font
+const toFancyLowercaseFont = (text) => {
+    const fonts = {
+        'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ғ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ',
+        'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 'q': 'ǫ', 'r': 'ʀ', 's': 's', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ', 'z': 'ᴢ'
+    };
+    return text.split('').map(char => fonts[char] || char).join('');
+};
+
+timoth({ 
+    nomCom: "menu", 
+    categorie: "Fredi-Menu", 
+    reaction: "☢️", 
+    nomFichier: __filename 
+}, async (dest, zk, commandeOptions) => {
+    const { repondre, prefixe, nomAuteurMessage } = commandeOptions;
+    const { cm } = require("../timnasa/timoth");
+    let coms = {};
+    let mode = "public";
+    
     if ((s.MODE).toLocaleLowerCase() != "yes") {
         mode = "private";
     }
-    cm.map(async (com, index) => {
-        if (!coms[com.categorie])
-            coms[com.categorie] = [];
+
+    cm.map(async (com) => {
+        if (!coms[com.categorie]) coms[com.categorie] = [];
         coms[com.categorie].push(com.nomCom);
     });
-    moment.tz.setDefault('Etc/GMT');
-// Créer une date et une heure en GMT
-const temps = moment().format('HH:mm:ss');
-const date = moment().format('DD/MM/YYYY');
-  let infoMsg =  `
-╭▱▰「 *${s.BOT}* 」▱▰❂
-┃⊛╭▰▱▰▱▰▱▰▱➻
-┃⊛│◆ 𝙾𝚠𝚗𝚎𝚛 : ${s.OWNER_NAME}
-┃⊛│◆ 𝙿𝚛𝚎𝚏𝚒𝚡 : [ ${s.PREFIXE} ] 
-┃⊛│◆ 𝙼𝚘𝚍𝚎 : *${mode}*
-┃⊛│◆ 𝚁𝚊𝚖  : 𝟴/𝟭𝟯𝟮 𝗚𝗕
-┃⊛│◆ 𝙳𝚊𝚝𝚎  : *${date}* 
-┃⊛│◆ 𝙿𝚕𝚊𝚝𝚏𝚘𝚛𝚖 : ${os.platform()}
-┃⊛│◆ 𝙲𝚛𝚎𝚊𝚝𝚘𝚛 : TimnasaTech
-┃⊛│◆ 𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜 : ${cm.length}
-┃⊛│◆ 𝚃𝚑𝚎𝚖𝚎 : timoth
-┃⊛└▰▱▰▱▰▱▰▱➻
-╰▱▰▱▰▱▰⊷▱▰▱▰▱❂\n${readmore}`;
-    let menuMsg = `ᴛɪᴍɴᴀsᴀ ᴛᴍᴅ ᴄᴍᴅ`;
+
+    moment.tz.setDefault("Africa/Dar_Es_Salam");
+    const hour = moment().hour();
+    let greeting = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ";
+    if (hour >= 12 && hour < 18) greeting = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ!";
+    else if (hour >= 18) greeting = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ!";
+    else if (hour >= 22 || hour < 5) greeting = "ɢᴏᴏᴅ ɴɪɢʜᴛ";
+
+    const temps = moment().format('HH:mm:ss');
+    const date = moment().format('DD/MM/YYYY');
+    const img = 'https://files.catbox.moe/5x1y2z.png';
+    const imgs = 'https://files.catbox.moe/5x1y2z.png';
+
+    const infoMsg = `
+╭───────────⊷
+*┋* *ʙᴏᴛ ɴᴀᴍᴇ :  ☢️TIMNASA_TMD1 ☢️*
+*┋* *ᴘʀᴇғɪx :* [ ${s.PREFIXE} ]
+*┋* *ᴍᴏᴅᴇ :* ${mode}
+*┋* *ᴅᴀᴛᴇ  :* ${date}
+*┋* *ᴘʟᴀᴛғᴏʀᴍ :* ${os.platform()}
+*┋* *ᴏᴡɴᴇʀ ɪs : timoth*
+*┋* *ᴘʟᴜɢɪɴs ᴄᴍᴅ :* ${cm.length}
+╰───────────⊷\n`;
+    
+    let menuMsg = ` *${greeting}*`;
+    
     for (const cat in coms) {
         menuMsg += `
-╭▱▱▱✺ *${cat}* ✺▰▰▰⊷ 
-┊│┌▰▱▰⊷•∞•⊷▱▰▱⊛
-┌┤┊ `;for (const cmd of coms[cat]) {
-        menuMsg += `          
-┊│┊☆  *${cmd}*`    
-        } 
-        menuMsg +=`
-┊│└▰▱▰⊷•∞•⊷▱▰▱⊛  
-╰▰▰▰═⊷✺•∞•✺⊷═▱▱▱⊷`
+*「 ${toFancyUppercaseFont(cat)} 」*
+╭───┈┈┈┈────⊷ `;
+        for (const cmd of coms[cat]) {
+            menuMsg += `          
+*┋* ${toFancyLowercaseFont(cmd)}`;   
+        }
+        menuMsg += `
+╰───┈┈┈┈────⊷`;
     }
+    
     menuMsg += `
-> Made By Timnasa Txmd\n
-`;
-   var lien = mybotpic();
-   if (lien.match(/\.(mp4|gif)$/i)) {
+> ○made by TIMNASA_TMD1 2025\n`;
+
     try {
-        zk.sendMessage(dest, { 
-         video: { url: lien },
-         caption:infoMsg + menuMsg,
-             contextInfo: {
-            isForwarded: true,
-             forwardedNewsletterMessageInfo: {
-             newsletterJid: '120363345407274799@newsletter',
-              newsletterName: "╭••➤ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
-              serverMessageId: 143,
-            },
-        },
-     }, { quoted: {
-            key: {
-                fromMe: false,
-                participant: `0@s.whatsapp.net`,
-                remoteJid: "status@broadcast"
-            },
-            message: {
-                contactMessage: {
-                    displayName: "✆︎ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1 verified",
-                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:TimnasaTech;BOT;;;\nFN:Timnasa_Tech\nitem1.TEL;waid=254700000000:+254 700 000000\nitem1.X-ABLabel:Bot\nEND:VCARD`
+        await zk.sendMessage(dest, { 
+            image: { url: "https://files.catbox.moe/uw4l17.jpeg" },
+            caption: infoMsg + menuMsg,
+            contextInfo: {
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: "120363313124070136@newsletter",
+                    newsletterName: "@FrediEzra",
+                    serverMessageId: -1
+                },
+                forwardingScore: 999,
+                externalAdReply: {
+                    title: "☢️LUCKY MD X-FORCE☢️",
+                    body: "🔑🗝️ Command List",
+                    thumbnailUrl: "https://files.catbox.moe/3o37c5.jpeg",
+                    sourceUrl: "https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f",
+                    mediaType: 1,
+                    renderLargerThumbnail: true
                 }
             }
-        } });
-   }
-    catch (e) {
-       console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-// Vérification pour .jpeg ou .png
-else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-    try {
-        zk.sendMessage(dest, {
-        image: { url: lien }, 
-        caption:infoMsg + menuMsg, 
-         contextInfo: {
-            isForwarded: true,
-             forwardedNewsletterMessageInfo: {
-             newsletterJid: '120363345407274799@newsletter',
-              newsletterName: "╭••➤ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
-              serverMessageId: 143,
-            },
-          },
-     }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-
-  // List of audio URLs
-    const audioUrls = [
-        "https://files.catbox.moe/y9u7w8.mp3" // New song added
-    ];
-
-    // Select a random audio file
-    const randomAudioUrl = audioUrls[Math.floor(Math.random() * audioUrls.length)];
-
-    try {
-        await zk.sendMessage(dest, {
-            audio: { url: randomAudioUrl },
-            mimetype: 'audio/mpeg',
-            ptt: true, // Send as a voice note
-          contextInfo: {
-            isForwarded: true,
-             forwardedNewsletterMessageInfo: {
-             newsletterJid: '120363345407274799@newsletter',
-              newsletterName: "╭••☯️ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1",
-              serverMessageId: 143,
-              },
-            },
-        }, { quoted: {
-            key: {
-                fromMe: false,
-                participant: `0@s.whatsapp.net`,
-                remoteJid: "status@broadcast"
-            },
-            message: {
-                contactMessage: {
-                    displayName: "✆︎ᴛɪᴍɴᴀsᴀ_ᴛᴍᴅ1 verified",
-                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:TimnasaTech;BOT;;;\nFN:Timnasa_Tech\nitem1.TEL;waid=254700000000:+254 700 000000\nitem1.X-ABLabel:Bot\nEND:VCARD`
-                }
-            }
-        } });
-    } catch (e) {
-        console.log("🥵🥵 Error sending audio: " + e);
-        repondre("🥵🥵 Error sending audio: " + e);
+        });
+      } catch (error) {
+        console.error("Menu error: ", error);
+        repondre("🥵🥵 Menu error: " + error);
     }
 });
