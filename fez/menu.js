@@ -26,7 +26,7 @@ const toFancyLowercaseFont = (text) => {
 
 timoth({ 
     nomCom: "menu", 
-    categorie: "Fredi-Menu", 
+    categorie: "Menu", 
     reaction: "☢️", 
     nomFichier: __filename 
 }, async (dest, zk, commandeOptions) => {
@@ -92,12 +92,12 @@ timoth({
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: "120363313124070136@newsletter",
-                    newsletterName: "@FrediEzra",
+                    newsletterName: "𝑇𝛪𝛭𝛮𝛥𝑆𝛥𝛸 𝑇𝛭𝐷1",
                     serverMessageId: -1
                 },
                 forwardingScore: 999,
                 externalAdReply: {
-                    title: "☢️LUCKY MD X-FORCE☢️",
+                    title: "𝑇𝛪𝛭𝛮𝛥𝑆𝛥𝛸 𝑇𝛭𝐷1",
                     body: "🔑🗝️ Command List",
                     thumbnailUrl: "https://files.catbox.moe/3o37c5.jpeg",
                     sourceUrl: "https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f",
