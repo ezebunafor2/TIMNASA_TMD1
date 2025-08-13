@@ -27,7 +27,7 @@ const toFancyLowercaseFont = (text) => {
 timoth({ 
     nomCom: "menu", 
     categorie: "Menu", 
-    reaction: "☢️", 
+    reaction: "🫆", 
     nomFichier: __filename 
 }, async (dest, zk, commandeOptions) => {
     const { repondre, prefixe, nomAuteurMessage } = commandeOptions;
@@ -53,8 +53,8 @@ timoth({
 
     const temps = moment().format('HH:mm:ss');
     const date = moment().format('DD/MM/YYYY');
-    const img = 'https://files.catbox.moe/5x1y2z.png';
-    const imgs = 'https://files.catbox.moe/5x1y2z.png';
+    const img = 'https://files.catbox.moe/h10jjv.jpg';
+    const imgs = 'https://files.catbox.moe/rb5win.jpg';
 
     const infoMsg = `
 ╭───────────⊷
@@ -86,7 +86,7 @@ timoth({
 
     try {
         await zk.sendMessage(dest, { 
-            image: { url: "https://files.catbox.moe/uw4l17.jpeg" },
+            image: { url: "https://files.catbox.moe/rb5win.jpg" },
             caption: infoMsg + menuMsg,
             contextInfo: {
                 isForwarded: true,
@@ -99,8 +99,8 @@ timoth({
                 externalAdReply: {
                     title: "𝑇𝛪𝛭𝛮𝛥𝑆𝛥𝛸 𝑇𝛭𝐷1",
                     body: "🔑🗝️ Command List",
-                    thumbnailUrl: "https://files.catbox.moe/3o37c5.jpeg",
-                    sourceUrl: "https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f",
+                    thumbnailUrl: "https://files.catbox.moe/h10jjv.jpg",
+                    sourceUrl: "https://whatsapp.com/channel/0029Vb9kKuVCMY0F5rmX2j1u",
                     mediaType: 1,
                     renderLargerThumbnail: true
                 }
