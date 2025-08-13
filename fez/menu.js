@@ -91,7 +91,7 @@ timoth({
             contextInfo: {
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: "120363313124070136@newsletter",
+                    newsletterJid: "120363332512801418@newsletter",
                     newsletterName: "𝑇𝛪𝛭𝛮𝛥𝑆𝛥𝛸 𝑇𝛭𝐷1",
                     serverMessageId: -1
                 },
