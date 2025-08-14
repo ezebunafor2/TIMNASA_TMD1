@@ -39,6 +39,16 @@
       "value": "yes",
       "required": false
     },
+    "ANTI_BAD": {
+      "description": "when enabled it bot was detect bad words and delete",
+      "value": "no",
+      "required": false
+    },
+    "ANTI_BUG": {
+      "description": "when you enable anti bug 🐛 bot is detect bugs text and delete",
+      "value": "no",
+      "required": false
+    },
     "AUTO_SAVE_CONTACTS": {
       "description":"Enter yes for your bot to auto save contacts",
       "value":"no",
