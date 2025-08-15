@@ -1,4 +1,4 @@
-  <a href="https://timnasax-detested.onrender.com"><img title="GET-SESSION ID HERE" src="https://img.shields.io/badge/GET-SESSION ID HERE-h?color=blue&style=for-the-badge&logo=nike" width="230" height="38.45"/></a></p>
+  <a href="https://timnasax-whatsapp-bot-tmd-skills.onrender.com"><img title="GET-SESSION ID HERE" src="https://img.shields.io/badge/GET-SESSION ID HERE-h?color=blue&style=for-the-badge&logo=nike" width="230" height="38.45"/></a></p>
 </p>
 
 
@@ -7,7 +7,7 @@
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 <p align="left">
-<a href="https://timnasax-detested.onrender.com"><img src="https://img.shields.io/badge/Pair%20session%20code-white" alt="𝗽𝗮𝗶𝗿 𝘀𝗲𝘀𝘀𝗶𝗼𝗻 𝗶𝗱 𝟮" width="300"></a>
+<a href="https://timnasax-whatsapp-bot-tmd-skills.onrender.com"><img src="https://img.shields.io/badge/Pair%20session%20code-white" alt="𝗽𝗮𝗶𝗿 𝘀𝗲𝘀𝘀𝗶𝗼𝗻 𝗶𝗱 𝟮" width="300"></a>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
 <p align="center">
@@ -22,7 +22,7 @@
   
 ![](gravity.gif)
    
-   <a href="https://signup.heroku.com/"><img title="CREATE-ACCOUNT" src="https://img.shields.io/badge/CREATE-ACCOUNT-h?color=green&style=for-the-badge&logo=red" width="180" height="43.45"/></a></p>
+   <a href="https://signup.heroku.com/"><img title="CREATE-ACCOUNT" src="https://img.shields.io/badge/CREATE-ACCOUNT-h?color=red&style=for-the-badge&logo='orange" width="180" height="43.45"/></a></p>
 
    ☢️IF YOU ALREADY HAVE A HEROKU ACCOUNT...DEPLOY NOW
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
