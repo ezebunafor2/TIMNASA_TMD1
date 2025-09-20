@@ -156,7 +156,7 @@ _CPU Core(s) Usage (12 Core CPU)_
 - *idle* : 13.38%
 - *irq*  : 0.00%
 𝙽𝚘𝚝𝚎 : 𝚋𝚘𝚝 𝚊𝚛𝚎𝚗'𝚝 𝚏𝚘𝚛 𝚏𝚛𝚎𝚎
-𝚔𝚎𝚎𝚙 𝚞𝚜𝚒𝚗𝚐 Lucky 𝚖𝚍\n\n`;
+𝚔𝚎𝚎𝚙 𝚞𝚜𝚒𝚗𝚐 *~TIMNASA_TMD1~* \n\n`;
     for (const cat in coms) {
         if (!emoji[cat]) {
             emoji[cat] = "";
