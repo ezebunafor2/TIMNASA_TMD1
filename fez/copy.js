@@ -10,7 +10,7 @@ const getContextInfo = (_0x21b2e3 = '', _0x2db8aa = '', _0x55d756 = '') => ({
   'isForwarded': true,
   'forwardedNewsletterMessageInfo': {
     'newsletterJid': "120363345407274799@newsletter",
-    'newsletterName': "╭••➤®Njabulo Jb",
+    'newsletterName': "╭••➤𝚻𝚰𝚳𝚴𝚫𝐒𝚫_𝚻𝚳𝐃1",
     'serverMessageId': Math.floor(100000 + Math.random() * 900000)
   },
   'externalAdReply': {
@@ -52,7 +52,7 @@ async function downloadFromApis(_0x114155) {
   throw new Error("Failed to retrieve download URL from all sources.");
 }
 timoth({
-  'nomCom': "copy",
+  'nomCom': "play",
   'aliases': ["song", "playdoc", "audio", "mp3"],
   'categorie': "download",
   'reaction': '🎸'
@@ -69,7 +69,7 @@ timoth({
     const _0x18285c = _0xca13eb.join(" ");
     const _0x10d512 = await searchYouTube(_0x18285c);
     await _0x25e8bc.sendMessage(_0x51fb91, {
-      'text': "> *1[don't do risk just wait]*\n> *2YouTube channel download*\n> *3wait are second to download you audio*\n> •\n> *4repo url github.com/NjabuloJ/Njabulo-Jb*",
+      'text': "> *1[don't do risk just wait]*\n> *2YouTube channel download*\n> *3wait are second to download you audio*\n> •\n> *4repo url github.com/Next5x*",
       'contextInfo': getContextInfo("Downloading", _0x4b1c5c, _0x10d512.thumbnail)
     }, {
       'quoted': _0x56078c
@@ -99,7 +99,7 @@ timoth({
   }
 });
 timoth({
-  'nomCom': "pase",
+  'nomCom': "video",
   'aliases': ["videodoc", "film", "mp4"],
   'categorie': "download",
   'reaction': '🎬'
@@ -116,7 +116,7 @@ timoth({
     const _0xb29864 = _0x4223a7.join(" ");
     const _0x104ff4 = await searchYouTube(_0xb29864);
     await _0x196609.sendMessage(_0x996bcb, {
-      'text': " *1[don't do risk just wait]*\n> *2YouTube channel download*\n> *3wait are second to download you video*\n> •\n> *4repo url github.com/NjabuloJ/Njabulo-Jb*",
+      'text': " *1[don't do risk just wait]*\n> *2YouTube channel download*\n> *3wait are second to download you video*\n> •\n> *4repo url github.com/Next5x*",
       'contextInfo': getContextInfo("Downloading", _0x387818, _0x104ff4.thumbnail)
     }, {
       'quoted': _0x59afa6
